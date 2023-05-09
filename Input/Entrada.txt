@@ -1,0 +1,3 @@
+Sub nicol
+EndSub
+a=3+3
