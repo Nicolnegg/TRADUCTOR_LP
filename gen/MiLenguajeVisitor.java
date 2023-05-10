@@ -1,4 +1,4 @@
-// Generated from C:/Users/princ/IdeaProjects/Traductor_LP/Grammar\MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from C:/Users/Nicol/Documents/Lenguajes/TRADUCTOR_LP/Grammar\MiLenguaje.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -9,6 +9,12 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * operations with no return type.
  */
 public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#inicio}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInicio(MiLenguajeParser.InicioContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#sentencia}.
 	 * @param ctx the parse tree
@@ -27,6 +33,30 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStepF(MiLenguajeParser.StepFContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#sub}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSub(MiLenguajeParser.SubContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#if}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf(MiLenguajeParser.IfContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#while}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhile(MiLenguajeParser.WhileContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#for}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFor(MiLenguajeParser.ForContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#identSentencia}.
 	 * @param ctx the parse tree
@@ -99,6 +129,12 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSentenciaIf(MiLenguajeParser.SentenciaIfContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#sentenciaElseIf}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSentenciaElseIf(MiLenguajeParser.SentenciaElseIfContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#funcionContinuidad}.
 	 * @param ctx the parse tree

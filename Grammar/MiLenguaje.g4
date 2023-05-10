@@ -1,32 +1,25 @@
 grammar MiLenguaje;
 
-//sintactico
+//sitactico
 
-sentencia : If Tkn_left_paren variable Tkn_right_paren Then sentenciaIf EndIf sentencia
-    | While Tkn_left_paren variable Tkn_right_paren sentenciaElse EndWhile sentencia
-    | For Id identFor Tkn_equals variable To variable stepF sentenciaElse EndFor sentencia
-    | Goto Id sentencia
-    | Program Tkn_period funcionContinuidad sentencia
-    | Stack Tkn_period funcionContinuidad sentencia
-    | TextWindow Tkn_period funcionContinuidad sentencia
-    | Array Tkn_period funcionContinuidad sentencia
-    |Id identSentencia sentencia
-    | Sub Id sentenciaElse EndSub  sentencia
+inicio : sentenciaElse sentencia ;
+sentencia: sub inicio
     | EOF ;
-sentenciaElse : If Tkn_left_paren variable Tkn_right_paren Then sentenciaIf EndIf sentenciaElse
-    | While Tkn_left_paren variable Tkn_right_paren sentenciaElse EndWhile sentenciaElse
-    | For Id identFor Tkn_equals variable To variable stepF sentenciaElse EndFor sentenciaElse
+sentenciaElse : if sentenciaElse
+    |  while sentenciaElse
+    |  for sentenciaElse
     | Goto Id sentenciaElse
     | Program Tkn_period funcionContinuidad sentenciaElse
     | Stack Tkn_period funcionContinuidad sentenciaElse
     | TextWindow Tkn_period funcionContinuidad sentenciaElse
     | Array Tkn_period funcionContinuidad sentenciaElse
-    | Id identSentencia sentenciaElse
+    |Id identSentencia sentenciaElse
     | ;
-
-stepF: Step variableStep
-    | ;
-
+stepF: Step variableStep | ;
+sub:Sub Id sentenciaElse EndSub ;
+if : If Tkn_left_paren variable Tkn_right_paren Then sentenciaIf EndIf;
+while : While Tkn_left_paren variable Tkn_right_paren sentenciaElse EndWhile;
+for :For Id identFor Tkn_equals variable To variable stepF sentenciaElse EndFor;
 identSentencia: Tkn_left_paren Tkn_right_paren
     | Tkn_colon
     | Tkn_equals variable
@@ -78,13 +71,14 @@ variableLog: valor operacionesLog
     | Tkn_minus operacionesLog ;
 variableStep: valor operacionesStep
     | Tkn_minus operacionesStep ;
-sentenciaIf: sentenciaElse
-    | ElseIf Tkn_left_paren variable Tkn_right_paren Then sentenciaIf
-    | Else sentenciaElse
-    |  ;
+sentenciaIf:  sentenciaElse sentenciaElseIf
+    | ;
+sentenciaElseIf:   ElseIf Tkn_left_paren variable Tkn_right_paren Then sentenciaIf
+    |  Else sentenciaElse
+    | ;
 funcionContinuidad: Id  Tkn_left_paren funcionVar Tkn_right_paren ;
 funcionVar: Tkn_comma funcionVar
-    | variable
+    | variable funcionVar
     | ;
 
 //lexico
@@ -131,7 +125,7 @@ Or: 'Or';
 And: 'And';
 
 //Operaciones
-Tkn_number : [0-9]+[.][0-9]* | [0-9]+ ;
+Tkn_number : [0-9]+[.][0-9]* | [0-9]+;
 Tkn_text : ('"') ~["]* ('"') ;
 ESPACIO: [ \t\r\n]+ -> skip;
 Id :[A-Za-zÇüéäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜøØƒáíóúñÑªºÁÂÀãÃðÐÊËÈıÍÎÏÌÓßÔÒõÕµþÞÚÛÙýÝ][A-Za-z0-9_ÇüéäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜøØƒáíóúñÑªºÁÂÀãÃðÐÊËÈıÍÎÏÌÓßÔÒõÕµþÞÚÛÙýÝ]*;

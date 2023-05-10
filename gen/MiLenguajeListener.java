@@ -1,4 +1,4 @@
-// Generated from C:/Users/princ/IdeaProjects/Traductor_LP/Grammar\MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from C:/Users/Nicol/Documents/Lenguajes/TRADUCTOR_LP/Grammar\MiLenguaje.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -6,6 +6,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * {@link MiLenguajeParser}.
  */
 public interface MiLenguajeListener extends ParseTreeListener {
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#inicio}.
+	 * @param ctx the parse tree
+	 */
+	void enterInicio(MiLenguajeParser.InicioContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#inicio}.
+	 * @param ctx the parse tree
+	 */
+	void exitInicio(MiLenguajeParser.InicioContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#sentencia}.
 	 * @param ctx the parse tree
@@ -36,6 +46,46 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStepF(MiLenguajeParser.StepFContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#sub}.
+	 * @param ctx the parse tree
+	 */
+	void enterSub(MiLenguajeParser.SubContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#sub}.
+	 * @param ctx the parse tree
+	 */
+	void exitSub(MiLenguajeParser.SubContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#if}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf(MiLenguajeParser.IfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#if}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf(MiLenguajeParser.IfContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#while}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhile(MiLenguajeParser.WhileContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#while}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhile(MiLenguajeParser.WhileContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#for}.
+	 * @param ctx the parse tree
+	 */
+	void enterFor(MiLenguajeParser.ForContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#for}.
+	 * @param ctx the parse tree
+	 */
+	void exitFor(MiLenguajeParser.ForContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#identSentencia}.
 	 * @param ctx the parse tree
@@ -156,6 +206,16 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSentenciaIf(MiLenguajeParser.SentenciaIfContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#sentenciaElseIf}.
+	 * @param ctx the parse tree
+	 */
+	void enterSentenciaElseIf(MiLenguajeParser.SentenciaElseIfContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#sentenciaElseIf}.
+	 * @param ctx the parse tree
+	 */
+	void exitSentenciaElseIf(MiLenguajeParser.SentenciaElseIfContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#funcionContinuidad}.
 	 * @param ctx the parse tree
