@@ -33,19 +33,20 @@ public class MetodosTraductor implements MiLenguajeListener {
     @Override
     public void enterSentenciaElse(MiLenguajeParser.SentenciaElseContext ctx) {
         if (!ctx.isEmpty()){
+            System.out.print("\n");
             if(ctx.Goto()!=null){
-                System.out.println("#No existe etiquetas en python");
+                System.out.print("#No existe etiquetas en python");
             }
             else if(ctx.Program()!=null){
                 if(ctx.Id().getText().equals("Delay")){
                     System.out.print(idmult(identacion) + "time.sleep");
                 }
                 else{
-                    System.out.println("#No existe Program en python");
+                    System.out.print("#No existe Program en python");
                 }
             }
             else if(ctx.Stack()!=null){
-                System.out.println("#No existe stack en python");
+                System.out.print("#No existe stack en python");
             }
             else if(ctx.TextWindow()!=null){
                 System.out.print(idmult(identacion) + "print");
@@ -77,7 +78,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                 System.out.print("Def ");
                 if (ctx.Id()!=null) {
                     String value = ctx.Id().getText();
-                    System.out.println(value +"():");
+                    System.out.print(value +"():");
                     identacion +=1;
                 }
             }
@@ -100,7 +101,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                 if (ctx.Tkn_right_paren() != null) {
                     System.out.print(")");
                     if (ctx.Then() != null) {
-                        System.out.println(":");
+                        System.out.print(":");
                         identacion +=1;
                     }
                 }
@@ -124,7 +125,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                 if (ctx.Tkn_right_paren() != null) {
                     System.out.print(")");
                     if (ctx.EndWhile() != null) {
-                        System.out.println(":");
+                        System.out.print(":");
                         identacion +=1;
                     }
                 }
@@ -148,7 +149,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                 if (ctx.Tkn_equals() != null) {
                     System.out.print(" in ");
                     if (ctx.To() != null) {
-                        System.out.println(" range ():");
+                        System.out.print(" range ():");
                         identacion +=1;
                     }
                 }
@@ -168,11 +169,11 @@ public class MetodosTraductor implements MiLenguajeListener {
         if(ctx.Tkn_left_paren()!=null){
             System.out.print("(");
             if(ctx.Tkn_right_paren()!=null){
-                System.out.println(")");
+                System.out.print(")");
             }
         }
         else if(ctx.Tkn_colon()!=null){
-            System.out.println("#No existe etiquetas en python");
+            System.out.print("#No existe etiquetas en python");
         }
         else if(ctx.Tkn_equals()!=null){
             System.out.print("=");
@@ -328,12 +329,12 @@ public class MetodosTraductor implements MiLenguajeListener {
                     System.out.print(")");
                 }
                 if(ctx.Then()!=null){
-                    System.out.println(":");
+                    System.out.print(":");
                 }
             }
         }
         if(ctx.Else()!=null){
-            System.out.println(idmult(identacion) + "else: ");
+            System.out.print(idmult(identacion) + "else: ");
         }
     }
 
