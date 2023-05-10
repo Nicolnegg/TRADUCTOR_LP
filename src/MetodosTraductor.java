@@ -32,11 +32,32 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterSentenciaElse(MiLenguajeParser.SentenciaElseContext ctx) {
+        if (!ctx.isEmpty()){
+            if(ctx.Goto()!=null){
+                System.out.println("#No existe etiquetas en python");
+            }
+            else if(ctx.Program()!=null){
+                if(ctx.Id().getText().equals("Delay")){
+                    System.out.print(idmult(identacion) + "time.sleep");
+                }
+                else{
+                    System.out.println("#No existe Program en python");
+                }
+            }
+            else if(ctx.Stack()!=null){
+                System.out.println("#No existe stack en python");
+            }
+            else if(ctx.TextWindow()!=null){
+                System.out.print(idmult(identacion) + "print");
+            }
+            else if(ctx.Id()!=null){
+                System.out.print(idmult(identacion) + ctx.Id().getText());
+            }
+        }
     }
 
     @Override
     public void exitSentenciaElse(MiLenguajeParser.SentenciaElseContext ctx) {
-
     }
 
     @Override
@@ -80,6 +101,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                     System.out.print(")");
                     if (ctx.Then() != null) {
                         System.out.println(":");
+                        identacion +=1;
                     }
                 }
             }
@@ -88,7 +110,9 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitIf(MiLenguajeParser.IfContext ctx) {
-
+        if (ctx.EndIf()!=null) {
+            identacion -=1;
+        }
     }
 
     @Override
@@ -101,6 +125,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                     System.out.print(")");
                     if (ctx.EndWhile() != null) {
                         System.out.println(":");
+                        identacion +=1;
                     }
                 }
             }
@@ -109,22 +134,49 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitWhile(MiLenguajeParser.WhileContext ctx) {
-
+        if (ctx.EndWhile()!=null) {
+            identacion -= 1;
+        }
     }
 
     @Override
     public void enterFor(MiLenguajeParser.ForContext ctx) {
-
+        if (ctx.For() != null) {
+            System.out.print(idmult(identacion)+"for  ");
+            if (ctx.Id() != null) {
+                System.out.print(ctx.Id().getText());
+                if (ctx.Tkn_equals() != null) {
+                    System.out.print(" in ");
+                    if (ctx.To() != null) {
+                        System.out.println(" range ():");
+                        identacion +=1;
+                    }
+                }
+            }
+        }
     }
 
     @Override
     public void exitFor(MiLenguajeParser.ForContext ctx) {
-
+        if (ctx.EndFor()!=null) {
+            identacion -= 1;
+        }
     }
 
     @Override
     public void enterIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx) {
-
+        if(ctx.Tkn_left_paren()!=null){
+            System.out.print("(");
+            if(ctx.Tkn_right_paren()!=null){
+                System.out.println(")");
+            }
+        }
+        else if(ctx.Tkn_colon()!=null){
+            System.out.println("#No existe etiquetas en python");
+        }
+        else if(ctx.Tkn_equals()!=null){
+            System.out.print("=");
+        }
     }
 
     @Override
@@ -194,6 +246,30 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterOperacionesLog(MiLenguajeParser.OperacionesLogContext ctx) {
+        if(ctx.Tkn_div()!=null){
+            System.out.print("/");
+        }
+
+        if(ctx.Tkn_minus()!=null){
+            System.out.print("-");
+        }
+
+        if(ctx.Tkn_plus()!=null){
+            System.out.print("+");
+        }
+
+        if(ctx.Tkn_times()!=null){
+            System.out.print("*");
+        }
+
+        if(ctx.Or()!=null){
+            System.out.print("Or");
+        }
+
+        if(ctx.And()!=null){
+            System.out.print("And");
+        }
+
 
     }
 
@@ -244,7 +320,21 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterSentenciaElseIf(MiLenguajeParser.SentenciaElseIfContext ctx) {
-
+        if(ctx.ElseIf()!=null){
+            System.out.print(idmult(identacion) + "elif ");
+            if(ctx.Tkn_left_paren()!=null){
+                System.out.print("(");
+                if(ctx.Tkn_right_paren()!=null){
+                    System.out.print(")");
+                }
+                if(ctx.Then()!=null){
+                    System.out.println(":");
+                }
+            }
+        }
+        if(ctx.Else()!=null){
+            System.out.println(idmult(identacion) + "else: ");
+        }
     }
 
     @Override

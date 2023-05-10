@@ -23,7 +23,7 @@ for :For Id identFor Tkn_equals variable To variable stepF sentenciaElse EndFor;
 identSentencia: Tkn_left_paren Tkn_right_paren
     | Tkn_colon
     | Tkn_equals variable
-    | Tkn_left_brac variable Tkn_right_brac arrayAsignaciones;
+    | arrayAsignaciones;
 identFor: Tkn_left_brac variable Tkn_right_brac identFor
     | ;
 arrayAsignaciones: Tkn_left_brac variable Tkn_right_brac arrayAsignaciones
@@ -55,10 +55,10 @@ operaciones: Tkn_plus variable
     | Tkn_less variableLog
     | Tkn_greater variableLog
     |  ;
-operacionesLog:  Tkn_plus variable
-    |  Tkn_minus variable
-    | Tkn_times variable
-    | Tkn_div variable
+operacionesLog:  Tkn_plus variableLog
+    |  Tkn_minus variableLog
+    | Tkn_times variableLog
+    | Tkn_div variableLog
     | And variable
     | Or variable
     |  ;
