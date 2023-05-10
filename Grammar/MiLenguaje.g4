@@ -2,12 +2,12 @@ grammar MiLenguaje;
 
 //sitactico
 
-inicio : sentenciaElse sentencia;
-sentencia: Sub Id sentenciaElse EndSub  inicio
+inicio : sentenciaElse sentencia ;
+sentencia: sub inicio
     | EOF ;
-sentenciaElse : If Tkn_left_paren variable Tkn_right_paren Then sentenciaIf EndIf sentenciaElse
-    | While Tkn_left_paren variable Tkn_right_paren sentenciaElse EndWhile sentenciaElse
-    | For Id identFor Tkn_equals variable To variable stepF sentenciaElse EndFor sentenciaElse
+sentenciaElse : if sentenciaElse
+    |  while sentenciaElse
+    |  for sentenciaElse
     | Goto Id sentenciaElse
     | Program Tkn_period funcionContinuidad sentenciaElse
     | Stack Tkn_period funcionContinuidad sentenciaElse
@@ -16,6 +16,10 @@ sentenciaElse : If Tkn_left_paren variable Tkn_right_paren Then sentenciaIf EndI
     |Id identSentencia sentenciaElse
     | ;
 stepF: Step variableStep | ;
+sub:Sub Id sentenciaElse EndSub ;
+if : If Tkn_left_paren variable Tkn_right_paren Then sentenciaIf EndIf;
+while : While Tkn_left_paren variable Tkn_right_paren sentenciaElse EndWhile;
+for :For Id identFor Tkn_equals variable To variable stepF sentenciaElse EndFor;
 identSentencia: Tkn_left_paren Tkn_right_paren
     | Tkn_colon
     | Tkn_equals variable

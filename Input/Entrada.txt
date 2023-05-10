@@ -1,5 +1,7 @@
 Sub angel
     a = nicol
+    If (3>=6)Then
+    EndIf
 EndSub
 a=3+3
 a="n"

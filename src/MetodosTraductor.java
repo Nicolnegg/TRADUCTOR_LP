@@ -3,6 +3,15 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class MetodosTraductor implements MiLenguajeListener {
+    int identacion =0;
+    public String idmult(int n){
+        String s = "";
+        for (int i = 1; i <= n; i++) {
+            s += "\t";
+        }
+        return s;
+    }
+
     @Override
     public void enterInicio(MiLenguajeParser.InicioContext ctx) {
 
@@ -14,31 +23,13 @@ public class MetodosTraductor implements MiLenguajeListener {
     }
 
     @Override
-    public void enterSentencia(MiLenguajeParser.SentenciaContext ctx) {
-        if (ctx.isEmpty()){
-
-            if (ctx.Sub()!=null) {
-                System.out.print("Def ");
-                if (ctx.Id()!=null) {
-                    String value = ctx.Id().getText();
-                    System.out.println(value +"():");
-                }
-            }
-            else if (ctx.Id()!=null) {
-                String value = ctx.Id().getText();
-                System.out.print(value);
-            }
-        }
-    }
+    public void enterSentencia(MiLenguajeParser.SentenciaContext ctx) {}
 
     @Override
-    public void exitSentencia(MiLenguajeParser.SentenciaContext ctx) {
-        System.out.print("#Finalizacion codigo\n");
-    }
+    public void exitSentencia(MiLenguajeParser.SentenciaContext ctx) {}
 
     @Override
     public void enterSentenciaElse(MiLenguajeParser.SentenciaElseContext ctx) {
-
     }
 
     @Override
@@ -53,6 +44,79 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitStepF(MiLenguajeParser.StepFContext ctx) {
+
+    }
+
+    @Override
+    public void enterSub(MiLenguajeParser.SubContext ctx) {
+        if (!ctx.isEmpty()){
+            if (ctx.Sub()!=null) {
+                System.out.print("Def ");
+                if (ctx.Id()!=null) {
+                    String value = ctx.Id().getText();
+                    System.out.println(value +"():");
+                    identacion +=1;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void exitSub(MiLenguajeParser.SubContext ctx) {
+        if (ctx.EndSub()!=null) {
+            identacion -=1;
+        }
+    }
+
+    @Override
+    public void enterIf(MiLenguajeParser.IfContext ctx) {
+        if (ctx.If() != null) {
+            System.out.print(idmult(identacion)+"if ");
+            if (ctx.Tkn_left_paren() != null) {
+                System.out.print("(");
+                if (ctx.Tkn_right_paren() != null) {
+                    System.out.print(")");
+                    if (ctx.Then() != null) {
+                        System.out.println(":");
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void exitIf(MiLenguajeParser.IfContext ctx) {
+
+    }
+
+    @Override
+    public void enterWhile(MiLenguajeParser.WhileContext ctx) {
+        if (ctx.While() != null) {
+            System.out.print(idmult(identacion)+"while  ");
+            if (ctx.Tkn_left_paren() != null) {
+                System.out.print("(");
+                if (ctx.Tkn_right_paren() != null) {
+                    System.out.print(")");
+                    if (ctx.EndWhile() != null) {
+                        System.out.println(":");
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void exitWhile(MiLenguajeParser.WhileContext ctx) {
+
+    }
+
+    @Override
+    public void enterFor(MiLenguajeParser.ForContext ctx) {
+
+    }
+
+    @Override
+    public void exitFor(MiLenguajeParser.ForContext ctx) {
 
     }
 
