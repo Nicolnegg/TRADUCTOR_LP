@@ -23,7 +23,9 @@ public class MetodosTraductor implements MiLenguajeListener {
     }
 
     @Override
-    public void enterSentencia(MiLenguajeParser.SentenciaContext ctx) {}
+    public void enterSentencia(MiLenguajeParser.SentenciaContext ctx) {
+
+    }
 
     @Override
     public void exitSentencia(MiLenguajeParser.SentenciaContext ctx) {}
