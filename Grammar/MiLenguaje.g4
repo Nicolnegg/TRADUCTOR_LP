@@ -10,7 +10,7 @@ sentencia : If Tkn_left_paren variable Tkn_right_paren Then sentenciaIf EndIf se
     | Stack Tkn_period funcionContinuidad sentencia
     | TextWindow Tkn_period funcionContinuidad sentencia
     | Array Tkn_period funcionContinuidad sentencia
-    |Id identSentencia sentencia
+    | Id identSentencia sentencia
     | Sub Id sentenciaElse EndSub  sentencia
     | EOF ;
 sentenciaElse : If Tkn_left_paren variable Tkn_right_paren Then sentenciaIf EndIf sentenciaElse
@@ -75,13 +75,14 @@ variableLog: valor operacionesLog
     | Tkn_minus operacionesLog ;
 variableStep: valor operacionesStep
     | Tkn_minus operacionesStep ;
-sentenciaIf: sentenciaElse
-    | ElseIf Tkn_left_paren variable Tkn_right_paren Then sentenciaIf
-    | Else sentenciaElse
-    |  ;
+sentenciaIf:  sentenciaElse sentenciaElseIf
+    | ;
+sentenciaElseIf:   ElseIf Tkn_left_paren variable Tkn_right_paren Then sentenciaIf
+    |  Else sentenciaElse
+    | ;
 funcionContinuidad: Id  Tkn_left_paren funcionVar Tkn_right_paren ;
 funcionVar: Tkn_comma funcionVar
-    | variable
+    | variable funcionVar
     | ;
 
 //lexico

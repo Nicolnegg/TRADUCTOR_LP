@@ -5,12 +5,35 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 public class MetodosTraductor implements MiLenguajeListener {
     @Override
     public void enterSentencia(MiLenguajeParser.SentenciaContext ctx) {
-        System.out.print('"');
+        if (ctx.isEmpty()){
+            if (ctx.If()!=null) {
+                System.out.println("if ");
+                if (ctx.Tkn_left_paren()!=null) {
+                    String value = ctx.Id().getText();
+                    System.out.println(value);
+                    if (ctx.Tkn_right_paren()!=null) {
+                        value = ctx.Id().getText();
+                        System.out.println(value + ":");
+                    }
+                }
+            }
+            else if (ctx.Sub()!=null) {
+                System.out.print("Def ");
+                if (ctx.Id()!=null) {
+                    String value = ctx.Id().getText();
+                    System.out.println(value +"():");
+                }
+            }
+            else if (ctx.Id()!=null) {
+                String value = ctx.Id().getText();
+                System.out.print(value);
+            }
+        }
     }
 
     @Override
     public void exitSentencia(MiLenguajeParser.SentenciaContext ctx) {
-        System.out.print('"');
+        System.out.print("#Finalizacion codigo\n");
     }
 
     @Override
@@ -150,6 +173,16 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitSentenciaIf(MiLenguajeParser.SentenciaIfContext ctx) {
+
+    }
+
+    @Override
+    public void enterSentenciaElseIf(MiLenguajeParser.SentenciaElseIfContext ctx) {
+
+    }
+
+    @Override
+    public void exitSentenciaElseIf(MiLenguajeParser.SentenciaElseIfContext ctx) {
 
     }
 
