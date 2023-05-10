@@ -1,6 +1,6 @@
 grammar MiLenguaje;
 
-//sitactico
+//sintactico
 
 sentencia : If Tkn_left_paren variable Tkn_right_paren Then sentenciaIf EndIf sentencia
     | While Tkn_left_paren variable Tkn_right_paren sentenciaElse EndWhile sentencia
@@ -21,9 +21,12 @@ sentenciaElse : If Tkn_left_paren variable Tkn_right_paren Then sentenciaIf EndI
     | Stack Tkn_period funcionContinuidad sentenciaElse
     | TextWindow Tkn_period funcionContinuidad sentenciaElse
     | Array Tkn_period funcionContinuidad sentenciaElse
-    |Id identSentencia sentenciaElse
+    | Id identSentencia sentenciaElse
     | ;
-stepF: Step variableStep | ;
+
+stepF: Step variableStep
+    | ;
+
 identSentencia: Tkn_left_paren Tkn_right_paren
     | Tkn_colon
     | Tkn_equals variable
@@ -128,7 +131,7 @@ Or: 'Or';
 And: 'And';
 
 //Operaciones
-Tkn_number : [0-9]+[.]{0,1}[0-9]* | [0-9]+;
+Tkn_number : [0-9]+[.][0-9]* | [0-9]+ ;
 Tkn_text : ('"') ~["]* ('"') ;
 ESPACIO: [ \t\r\n]+ -> skip;
 Id :[A-Za-zÇüéäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜøØƒáíóúñÑªºÁÂÀãÃðÐÊËÈıÍÎÏÌÓßÔÒõÕµþÞÚÛÙýÝ][A-Za-z0-9_ÇüéäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜøØƒáíóúñÑªºÁÂÀãÃðÐÊËÈıÍÎÏÌÓßÔÒõÕµþÞÚÛÙýÝ]*;
