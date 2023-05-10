@@ -4,20 +4,20 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class MetodosTraductor implements MiLenguajeListener {
     @Override
+    public void enterInicio(MiLenguajeParser.InicioContext ctx) {
+
+    }
+
+    @Override
+    public void exitInicio(MiLenguajeParser.InicioContext ctx) {
+
+    }
+
+    @Override
     public void enterSentencia(MiLenguajeParser.SentenciaContext ctx) {
         if (ctx.isEmpty()){
-            if (ctx.If()!=null) {
-                System.out.println("if ");
-                if (ctx.Tkn_left_paren()!=null) {
-                    String value = ctx.Id().getText();
-                    System.out.println(value);
-                    if (ctx.Tkn_right_paren()!=null) {
-                        value = ctx.Id().getText();
-                        System.out.println(value + ":");
-                    }
-                }
-            }
-            else if (ctx.Sub()!=null) {
+
+            if (ctx.Sub()!=null) {
                 System.out.print("Def ");
                 if (ctx.Id()!=null) {
                     String value = ctx.Id().getText();

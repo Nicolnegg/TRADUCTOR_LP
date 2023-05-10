@@ -2,16 +2,8 @@ grammar MiLenguaje;
 
 //sitactico
 
-sentencia : If Tkn_left_paren variable Tkn_right_paren Then sentenciaIf EndIf sentencia
-    | While Tkn_left_paren variable Tkn_right_paren sentenciaElse EndWhile sentencia
-    | For Id identFor Tkn_equals variable To variable stepF sentenciaElse EndFor sentencia
-    | Goto Id sentencia
-    | Program Tkn_period funcionContinuidad sentencia
-    | Stack Tkn_period funcionContinuidad sentencia
-    | TextWindow Tkn_period funcionContinuidad sentencia
-    | Array Tkn_period funcionContinuidad sentencia
-    | Id identSentencia sentencia
-    | Sub Id sentenciaElse EndSub  sentencia
+inicio : sentenciaElse sentencia;
+sentencia: Sub Id sentenciaElse EndSub  inicio
     | EOF ;
 sentenciaElse : If Tkn_left_paren variable Tkn_right_paren Then sentenciaIf EndIf sentenciaElse
     | While Tkn_left_paren variable Tkn_right_paren sentenciaElse EndWhile sentenciaElse
