@@ -34,6 +34,7 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStepF(MiLenguajeParser.StepFContext ctx);
 	/**
+<<<<<<< HEAD
 	 * Visit a parse tree produced by {@link MiLenguajeParser#sub}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -58,6 +59,8 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFor(MiLenguajeParser.ForContext ctx);
 	/**
+=======
+>>>>>>> origin/master
 	 * Visit a parse tree produced by {@link MiLenguajeParser#identSentencia}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

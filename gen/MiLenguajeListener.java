@@ -47,6 +47,7 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 */
 	void exitStepF(MiLenguajeParser.StepFContext ctx);
 	/**
+<<<<<<< HEAD
 	 * Enter a parse tree produced by {@link MiLenguajeParser#sub}.
 	 * @param ctx the parse tree
 	 */
@@ -87,6 +88,8 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 */
 	void exitFor(MiLenguajeParser.ForContext ctx);
 	/**
+=======
+>>>>>>> origin/master
 	 * Enter a parse tree produced by {@link MiLenguajeParser#identSentencia}.
 	 * @param ctx the parse tree
 	 */

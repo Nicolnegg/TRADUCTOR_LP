@@ -64,6 +64,7 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+<<<<<<< HEAD
 	@Override public void enterSub(MiLenguajeParser.SubContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -112,6 +113,8 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+=======
+>>>>>>> origin/master
 	@Override public void enterIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -45,6 +45,7 @@ public class MiLenguajeBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+<<<<<<< HEAD
 	@Override public T visitSub(MiLenguajeParser.SubContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -73,6 +74,8 @@ public class MiLenguajeBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+=======
+>>>>>>> origin/master
 	@Override public T visitIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
