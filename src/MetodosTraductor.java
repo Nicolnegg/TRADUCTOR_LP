@@ -103,6 +103,7 @@ public class MetodosTraductor implements MiLenguajeListener {
             System.out.print(idmult(identacion)+"if ");
             if (ctx.Tkn_left_paren() != null) {
                 System.out.print("(");
+
                 if (ctx.Tkn_right_paren() != null) {
                     System.out.print(")");
                     if (ctx.Then() != null) {
@@ -214,16 +215,42 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterValor(MiLenguajeParser.ValorContext ctx) {
+        if(ctx.Tkn_left_paren()!=null){
+            System.out.print('(');
+
+
+        }
+        else if(ctx.True()!=null){
+            System.out.print("True");
+        }
+        else if(ctx.False()!=null){
+            System.out.print("False");
+        }
+        else if(ctx.Id()!=null){
+            System.out.print(ctx.Id().getText());
+        }
+        else if(ctx.Tkn_number()!=null){
+            System.out.print(ctx.Tkn_number().getText());
+        }
+        else if(ctx.Tkn_text()!=null){
+            System.out.print(ctx.Tkn_text().getText());
+        }
+
 
     }
 
     @Override
     public void exitValor(MiLenguajeParser.ValorContext ctx) {
-
+        if(ctx.Tkn_right_paren()!=null){
+            System.out.print(')');
+        }
     }
 
     @Override
     public void enterVariable(MiLenguajeParser.VariableContext ctx) {
+        if(ctx.Tkn_minus()!=null){
+            System.out.print("-");
+        }
 
     }
 
@@ -367,6 +394,12 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterFuncionContinuidad(MiLenguajeParser.FuncionContinuidadContext ctx) {
+        if(ctx.Tkn_left_paren()!=null){
+            System.out.print("(");
+            if(ctx.Tkn_right_paren()!=null){
+                System.out.print(")");
+            }
+        }
 
     }
 
@@ -376,8 +409,10 @@ public class MetodosTraductor implements MiLenguajeListener {
     }
 
     @Override
-    public void enterFuncionVar(MiLenguajeParser.FuncionVarContext ctx) {
-
+    public void enterFuncionVar(MiLenguajeParser.FuncionVarContext ctx){
+        if(ctx.Tkn_comma()!=null){
+            System.out.print(",");
+        }
     }
 
     @Override
