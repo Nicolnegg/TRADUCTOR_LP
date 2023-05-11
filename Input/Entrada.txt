@@ -36,8 +36,9 @@ Sub nicol
     EndIf
 EndSub
 a=3-(-(-3))
-a=a[2]/a[2]["nicol"][3]+6> "False"
-For i=3 To 4
+m="True"
+a=a[2]/a[2]["nicol"][3]+6> "True"
+For i=3 To 4 Step 5
     a=5
     a:
     If (i=4)Then
