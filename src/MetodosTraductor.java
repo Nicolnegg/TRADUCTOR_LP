@@ -227,12 +227,16 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterArrayAsignacionesCondicion(MiLenguajeParser.ArrayAsignacionesCondicionContext ctx) {
-
+        if(ctx.Tkn_left_brac()!=null){
+            System.out.print("[");
+        }
     }
 
     @Override
     public void exitArrayAsignacionesCondicion(MiLenguajeParser.ArrayAsignacionesCondicionContext ctx) {
-
+        if(ctx.Tkn_right_brac()!=null){
+            System.out.print("]");
+        }
     }
 
     @Override
@@ -300,11 +304,16 @@ public class MetodosTraductor implements MiLenguajeListener {
     @Override
     public void enterArrayOperacionCondicion(MiLenguajeParser.ArrayOperacionCondicionContext ctx) {
 
+        if(ctx.Tkn_left_brac()!=null){
+            System.out.print("[");
+        }
     }
 
     @Override
     public void exitArrayOperacionCondicion(MiLenguajeParser.ArrayOperacionCondicionContext ctx) {
-
+        if(ctx.Tkn_right_brac()!=null){
+            System.out.print("]");
+        }
     }
 
     @Override
@@ -338,11 +347,11 @@ public class MetodosTraductor implements MiLenguajeListener {
         }
 
         else if(ctx.Or()!=null){
-            System.out.print("Or");
+            System.out.print(" Or ");
         }
 
         else if(ctx.And()!=null){
-            System.out.print("And");
+            System.out.print(" And ");
         }
 
         else if(ctx.Tkn_equals()!=null){
@@ -398,11 +407,11 @@ public class MetodosTraductor implements MiLenguajeListener {
         }
 
         else if(ctx.Or()!=null){
-            System.out.print("Or");
+            System.out.print(" Or ");
         }
 
         else if(ctx.And()!=null){
-            System.out.print("And");
+            System.out.print(" And ");
         }
 
 
