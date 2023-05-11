@@ -97,13 +97,22 @@ public class MetodosTraductor implements MiLenguajeListener {
     }
 
     @Override
+    public void enterIfCondicion(MiLenguajeParser.IfCondicionContext ctx) {
+
+    }
+
+    @Override
+    public void exitIfCondicion(MiLenguajeParser.IfCondicionContext ctx) {
+
+    }
+
+    @Override
     public void enterIf(MiLenguajeParser.IfContext ctx) {
         if (ctx.If() != null) {
             System.out.print("\n");
             System.out.print(idmult(identacion)+"if ");
             if (ctx.Tkn_left_paren() != null) {
                 System.out.print("(");
-
                 if (ctx.Tkn_right_paren() != null) {
                     System.out.print(")");
                     if (ctx.Then() != null) {
@@ -120,6 +129,16 @@ public class MetodosTraductor implements MiLenguajeListener {
         if (ctx.EndIf()!=null) {
             identacion -=1;
         }
+    }
+
+    @Override
+    public void enterWhileCondicion(MiLenguajeParser.WhileCondicionContext ctx) {
+
+    }
+
+    @Override
+    public void exitWhileCondicion(MiLenguajeParser.WhileCondicionContext ctx) {
+
     }
 
     @Override
@@ -145,6 +164,16 @@ public class MetodosTraductor implements MiLenguajeListener {
         if (ctx.EndWhile()!=null) {
             identacion -= 1;
         }
+    }
+
+    @Override
+    public void enterForCondicion(MiLenguajeParser.ForCondicionContext ctx) {
+
+    }
+
+    @Override
+    public void exitForCondicion(MiLenguajeParser.ForCondicionContext ctx) {
+
     }
 
     @Override
@@ -200,6 +229,16 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitIdentFor(MiLenguajeParser.IdentForContext ctx) {
+
+    }
+
+    @Override
+    public void enterArrayAsignacionesCondicion(MiLenguajeParser.ArrayAsignacionesCondicionContext ctx) {
+
+    }
+
+    @Override
+    public void exitArrayAsignacionesCondicion(MiLenguajeParser.ArrayAsignacionesCondicionContext ctx) {
 
     }
 
@@ -266,6 +305,16 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitVariable(MiLenguajeParser.VariableContext ctx) {
+
+    }
+
+    @Override
+    public void enterArrayOperacionCondicion(MiLenguajeParser.ArrayOperacionCondicionContext ctx) {
+
+    }
+
+    @Override
+    public void exitArrayOperacionCondicion(MiLenguajeParser.ArrayOperacionCondicionContext ctx) {
 
     }
 
@@ -407,7 +456,9 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterVariableLog(MiLenguajeParser.VariableLogContext ctx) {
-
+        if(ctx.Tkn_minus()!=null){
+            System.out.print("-");
+        }
     }
 
     @Override
@@ -452,6 +503,16 @@ public class MetodosTraductor implements MiLenguajeListener {
     }
 
     @Override
+    public void enterElseifCondicion(MiLenguajeParser.ElseifCondicionContext ctx) {
+
+    }
+
+    @Override
+    public void exitElseifCondicion(MiLenguajeParser.ElseifCondicionContext ctx) {
+
+    }
+
+    @Override
     public void enterElseif(MiLenguajeParser.ElseifContext ctx) {
         if(ctx.ElseIf()!=null){
             System.out.print("\n");
@@ -478,16 +539,15 @@ public class MetodosTraductor implements MiLenguajeListener {
     public void enterFuncionContinuidad(MiLenguajeParser.FuncionContinuidadContext ctx) {
         if(ctx.Tkn_left_paren()!=null){
             System.out.print("(");
-            if(ctx.Tkn_right_paren()!=null){
-                System.out.print(")");
-            }
         }
 
     }
 
     @Override
     public void exitFuncionContinuidad(MiLenguajeParser.FuncionContinuidadContext ctx) {
-
+        if(ctx.Tkn_right_paren()!=null){
+            System.out.print(")");
+        }
     }
 
     @Override

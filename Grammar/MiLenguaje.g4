@@ -17,16 +17,20 @@ sentenciaElse : if sentenciaElse
     | ;
 stepF: Step variableStep | ;
 sub:Sub Id sentenciaElse EndSub ;
-if : If Tkn_left_paren variable Tkn_right_paren Then sentenciaIf EndIf;
-while : While Tkn_left_paren variable Tkn_right_paren sentenciaElse EndWhile;
-for :For Id identFor Tkn_equals variable To variable stepF sentenciaElse EndFor;
+ifCondicion: If Tkn_left_paren variable Tkn_right_paren Then;
+if :  ifCondicion sentenciaIf EndIf;
+whileCondicion: While Tkn_left_paren variable Tkn_right_paren;
+while : whileCondicion sentenciaElse EndWhile;
+forCondicion: For Id identFor Tkn_equals variable To variable stepF;
+for : forCondicion sentenciaElse EndFor;
 identSentencia: Tkn_left_paren Tkn_right_paren
     | Tkn_colon
     | Tkn_equals variable
     | arrayAsignaciones;
 identFor: Tkn_left_brac variable Tkn_right_brac identFor
     | ;
-arrayAsignaciones: Tkn_left_brac variable Tkn_right_brac arrayAsignaciones
+arrayAsignacionesCondicion: Tkn_left_brac variable Tkn_right_brac;
+arrayAsignaciones: arrayAsignacionesCondicion arrayAsignaciones
     | Tkn_equals variable;
 valor: Tkn_left_paren variable Tkn_right_paren
     | True
@@ -40,7 +44,8 @@ valor: Tkn_left_paren variable Tkn_right_paren
     | Array Tkn_period funcionContinuidad  ;
 variable: valor operaciones
     | Tkn_minus valor operaciones ;
-arrayOperacion: Tkn_left_brac variable Tkn_right_brac arrayOperacion
+arrayOperacionCondicion: Tkn_left_brac variable Tkn_right_brac;
+arrayOperacion:  arrayOperacionCondicion arrayOperacion
     |  ;
 operaciones: Tkn_plus variable
     |  Tkn_minus variable
@@ -76,7 +81,8 @@ sentenciaIf:  sentenciaElse sentenciaElseIf
 sentenciaElseIf:   elseif sentenciaElseIf
     |  Else sentenciaElse
     | ;
-elseif: ElseIf Tkn_left_paren variable Tkn_right_paren Then sentenciaElse;
+elseifCondicion: ElseIf Tkn_left_paren variable Tkn_right_paren Then;
+elseif: elseifCondicion  sentenciaElse;
 funcionContinuidad: Id  Tkn_left_paren funcionVar Tkn_right_paren ;
 funcionVar: Tkn_comma funcionVar
     | variable funcionVar
