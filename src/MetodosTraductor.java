@@ -483,15 +483,15 @@ public class MetodosTraductor implements MiLenguajeListener {
     public void enterSentenciaElseIf(MiLenguajeParser.SentenciaElseIfContext ctx) {
         if(ctx.Else()!=null){
             System.out.print("\n");
-            System.out.print(idmult(identacion) + "else: ");
-            identacion +=1;
+            System.out.print(idmult(identacion-1) + "else: ");
+
         }
     }
 
     @Override
     public void exitSentenciaElseIf(MiLenguajeParser.SentenciaElseIfContext ctx) {
         if(ctx.Else()!=null){
-            identacion -=1;
+
         }
     }
 
@@ -499,7 +499,7 @@ public class MetodosTraductor implements MiLenguajeListener {
     public void enterElseifCondicion(MiLenguajeParser.ElseifCondicionContext ctx) {
         if(ctx.ElseIf()!=null){
             System.out.print("\n");
-            System.out.print(idmult(identacion) + "elif ");
+            System.out.print(idmult(identacion-1) + "elif ");
             if(ctx.Tkn_left_paren()!=null){
                 System.out.print("(");
             }
@@ -512,7 +512,6 @@ public class MetodosTraductor implements MiLenguajeListener {
             System.out.print(")");
             if(ctx.Then()!=null){
                 System.out.print(":");
-                identacion +=1;
             }
         }
     }
@@ -523,7 +522,6 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitElseif(MiLenguajeParser.ElseifContext ctx) {
-        identacion -=1;
     }
 
     @Override
