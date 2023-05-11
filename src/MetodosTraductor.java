@@ -98,30 +98,29 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterIfCondicion(MiLenguajeParser.IfCondicionContext ctx) {
-
-    }
-
-    @Override
-    public void exitIfCondicion(MiLenguajeParser.IfCondicionContext ctx) {
-
-    }
-
-    @Override
-    public void enterIf(MiLenguajeParser.IfContext ctx) {
         if (ctx.If() != null) {
             System.out.print("\n");
             System.out.print(idmult(identacion)+"if ");
             if (ctx.Tkn_left_paren() != null) {
                 System.out.print("(");
-                if (ctx.Tkn_right_paren() != null) {
-                    System.out.print(")");
-                    if (ctx.Then() != null) {
-                        System.out.print(":");
-                        identacion +=1;
-                    }
-                }
             }
         }
+    }
+
+    @Override
+    public void exitIfCondicion(MiLenguajeParser.IfCondicionContext ctx) {
+        if (ctx.Tkn_right_paren() != null) {
+            System.out.print(")");
+            if (ctx.Then() != null) {
+                System.out.print(":");
+                identacion +=1;
+            }
+        }
+    }
+
+    @Override
+    public void enterIf(MiLenguajeParser.IfContext ctx) {
+
     }
 
     @Override
@@ -133,30 +132,28 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterWhileCondicion(MiLenguajeParser.WhileCondicionContext ctx) {
-
-    }
-
-    @Override
-    public void exitWhileCondicion(MiLenguajeParser.WhileCondicionContext ctx) {
-
-    }
-
-    @Override
-    public void enterWhile(MiLenguajeParser.WhileContext ctx) {
         if (ctx.While() != null) {
             System.out.print("\n");
             System.out.print(idmult(identacion)+"while  ");
             if (ctx.Tkn_left_paren() != null) {
                 System.out.print("(");
-                if (ctx.Tkn_right_paren() != null) {
-                    System.out.print(")");
-                    if (ctx.EndWhile() != null) {
-                        System.out.print(":");
-                        identacion +=1;
-                    }
-                }
             }
         }
+
+    }
+
+    @Override
+    public void exitWhileCondicion(MiLenguajeParser.WhileCondicionContext ctx) {
+        if (ctx.Tkn_right_paren() != null) {
+            System.out.print(")");
+            System.out.print(":");
+            identacion +=1;
+
+        }
+    }
+
+    @Override
+    public void enterWhile(MiLenguajeParser.WhileContext ctx) {
     }
 
     @Override
@@ -168,16 +165,6 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterForCondicion(MiLenguajeParser.ForCondicionContext ctx) {
-
-    }
-
-    @Override
-    public void exitForCondicion(MiLenguajeParser.ForCondicionContext ctx) {
-
-    }
-
-    @Override
-    public void enterFor(MiLenguajeParser.ForContext ctx) {
         if (ctx.For() != null) {
             System.out.print("\n");
             System.out.print(idmult(identacion)+"for  ");
@@ -192,6 +179,15 @@ public class MetodosTraductor implements MiLenguajeListener {
                 }
             }
         }
+    }
+
+    @Override
+    public void exitForCondicion(MiLenguajeParser.ForCondicionContext ctx) {
+
+    }
+
+    @Override
+    public void enterFor(MiLenguajeParser.ForContext ctx) {
     }
 
     @Override
@@ -504,30 +500,28 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterElseifCondicion(MiLenguajeParser.ElseifCondicionContext ctx) {
-
-    }
-
-    @Override
-    public void exitElseifCondicion(MiLenguajeParser.ElseifCondicionContext ctx) {
-
-    }
-
-    @Override
-    public void enterElseif(MiLenguajeParser.ElseifContext ctx) {
         if(ctx.ElseIf()!=null){
             System.out.print("\n");
             System.out.print(idmult(identacion) + "elif ");
             if(ctx.Tkn_left_paren()!=null){
                 System.out.print("(");
-                if(ctx.Tkn_right_paren()!=null){
-                    System.out.print(")");
-                    if(ctx.Then()!=null){
-                        System.out.print(":");
-                        identacion +=1;
-                    }
-                }
             }
         }
+    }
+
+    @Override
+    public void exitElseifCondicion(MiLenguajeParser.ElseifCondicionContext ctx) {
+        if(ctx.Tkn_right_paren()!=null){
+            System.out.print(")");
+            if(ctx.Then()!=null){
+                System.out.print(":");
+                identacion +=1;
+            }
+        }
+    }
+
+    @Override
+    public void enterElseif(MiLenguajeParser.ElseifContext ctx) {
     }
 
     @Override
