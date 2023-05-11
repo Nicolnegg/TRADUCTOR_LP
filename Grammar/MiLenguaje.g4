@@ -30,6 +30,7 @@ identSentencia: Tkn_left_paren Tkn_right_paren
 identFor: Tkn_left_brac variable Tkn_right_brac identFor
     | ;
 arrayAsignacionesCondicion: Tkn_left_brac variable Tkn_right_brac;
+
 arrayAsignaciones: arrayAsignacionesCondicion arrayAsignaciones
     | Tkn_equals variable;
 valor: Tkn_left_paren variable Tkn_right_paren
