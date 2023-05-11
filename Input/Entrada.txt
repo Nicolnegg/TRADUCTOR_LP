@@ -12,7 +12,7 @@ TextWindow.WriteLine("Hello " + name + "!")
 While (3)
 
 EndWhile
-a=a[2]/a[2]["nicol"][3]+6> (nicol = s)
+a[2] = a[2]+a[2]*x["nicol"]-a[3]+6> (nicol = s)
 
 Sub nicol
     angel()
