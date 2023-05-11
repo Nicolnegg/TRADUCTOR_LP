@@ -73,9 +73,10 @@ variableStep: valor operacionesStep
     | Tkn_minus operacionesStep ;
 sentenciaIf:  sentenciaElse sentenciaElseIf
     | ;
-sentenciaElseIf:   ElseIf Tkn_left_paren variable Tkn_right_paren Then sentenciaIf
+sentenciaElseIf:   elseif sentenciaElseIf
     |  Else sentenciaElse
     | ;
+elseif: ElseIf Tkn_left_paren variable Tkn_right_paren Then sentenciaElse;
 funcionContinuidad: Id  Tkn_left_paren funcionVar Tkn_right_paren ;
 funcionVar: Tkn_comma funcionVar
     | variable funcionVar

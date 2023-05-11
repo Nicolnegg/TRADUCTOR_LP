@@ -22,7 +22,6 @@ Sub nicol
         a=3 And 3
         ElseIf (3+8>i+1) Then
             a=3
-
         Else
             a=5+3-(7)
             While (i=5)
