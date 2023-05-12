@@ -361,11 +361,11 @@ public class MetodosTraductor implements MiLenguajeListener {
         }
 
         else if(ctx.Or()!=null){
-            System.out.print(" Or ");
+            System.out.print(" or ");
         }
 
         else if(ctx.And()!=null){
-            System.out.print(" And ");
+            System.out.print(" and ");
         }
 
         else if(ctx.Tkn_equals()!=null){
