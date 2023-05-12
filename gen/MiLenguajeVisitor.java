@@ -1,4 +1,4 @@
-// Generated from D:/Trabajos UN/2023-1/Lenguajes de programación/TRADUCTOR_LP/Grammar\MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from C:/Users/Usuario/OneDrive/Escritorio/Proyecto lenguajes/TRADUCTOR_LP/Grammar\MiLenguaje.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -69,6 +69,12 @@ public interface MiLenguajeVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitForCondicion(MiLenguajeParser.ForCondicionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link MiLenguajeParser#toCondicion}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitToCondicion(MiLenguajeParser.ToCondicionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link MiLenguajeParser#for}.
 	 * @param ctx the parse tree

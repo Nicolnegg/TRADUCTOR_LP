@@ -1,4 +1,4 @@
-// Generated from D:/Trabajos UN/2023-1/Lenguajes de programación/TRADUCTOR_LP/Grammar\MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from C:/Users/Usuario/OneDrive/Escritorio/Proyecto lenguajes/TRADUCTOR_LP/Grammar\MiLenguaje.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -81,6 +81,13 @@ public class MiLenguajeBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitForCondicion(MiLenguajeParser.ForCondicionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitToCondicion(MiLenguajeParser.ToCondicionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

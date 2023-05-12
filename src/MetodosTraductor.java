@@ -66,6 +66,9 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterStepF(MiLenguajeParser.StepFContext ctx) {
+        if(ctx.Step()!=null){
+            System.out.print(',');
+        }
 
     }
 
@@ -171,11 +174,7 @@ public class MetodosTraductor implements MiLenguajeListener {
             if (ctx.Id() != null) {
                 System.out.print(ctx.Id().getText());
                 if (ctx.Tkn_equals() != null) {
-                    System.out.print(" in ");
-                    if (ctx.To() != null) {
-                        System.out.print(" range ():");
-                        identacion +=1;
-                    }
+                    System.out.print(" in range (");
                 }
             }
         }
@@ -183,6 +182,23 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitForCondicion(MiLenguajeParser.ForCondicionContext ctx) {
+        if(ctx.stepF()!=null){
+            System.out.print("):");
+        }
+
+    }
+
+    @Override
+    public void enterToCondicion(MiLenguajeParser.ToCondicionContext ctx) {
+        if (ctx.To() != null) {
+            System.out.print(",");
+            identacion +=1;
+        }
+
+    }
+
+    @Override
+    public void exitToCondicion(MiLenguajeParser.ToCondicionContext ctx) {
 
     }
 
@@ -257,16 +273,14 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterValor(MiLenguajeParser.ValorContext ctx) {
-        if(ctx.Tkn_left_paren()!=null){
+        if(ctx.Tkn_left_paren()!=null) {
             System.out.print('(');
-
-
         }
-        else if(ctx.True()!=null){
-            System.out.print("True");
+        else if(ctx.True()!=null) {
+            System.out.print("true");
         }
         else if(ctx.False()!=null){
-            System.out.print("False");
+            System.out.print("false");
         }
         else if(ctx.Id()!=null){
             System.out.print(ctx.Id().getText());
@@ -347,11 +361,11 @@ public class MetodosTraductor implements MiLenguajeListener {
         }
 
         else if(ctx.Or()!=null){
-            System.out.print(" Or ");
+            System.out.print(" or ");
         }
 
         else if(ctx.And()!=null){
-            System.out.print(" And ");
+            System.out.print(" and ");
         }
 
         else if(ctx.Tkn_equals()!=null){
@@ -407,11 +421,11 @@ public class MetodosTraductor implements MiLenguajeListener {
         }
 
         else if(ctx.Or()!=null){
-            System.out.print(" Or ");
+            System.out.print(" or ");
         }
 
         else if(ctx.And()!=null){
-            System.out.print(" And ");
+            System.out.print(" and ");
         }
 
 

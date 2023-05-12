@@ -21,7 +21,8 @@ ifCondicion: If Tkn_left_paren variable Tkn_right_paren Then;
 if :  ifCondicion sentenciaIf EndIf;
 whileCondicion: While Tkn_left_paren variable Tkn_right_paren;
 while : whileCondicion sentenciaElse EndWhile;
-forCondicion: For Id identFor Tkn_equals variable To variable stepF;
+forCondicion: For Id identFor Tkn_equals variable toCondicion stepF;
+toCondicion: To variable ;
 for : forCondicion sentenciaElse EndFor;
 identSentencia: Tkn_left_paren Tkn_right_paren
     | Tkn_colon
@@ -39,7 +40,7 @@ valor: Tkn_left_paren variable Tkn_right_paren
     | Id arrayOperacion
     | Tkn_number
     | Tkn_text
-    |  Program Tkn_period funcionContinuidad
+    | Program Tkn_period funcionContinuidad
     | Stack Tkn_period funcionContinuidad
     | TextWindow Tkn_period funcionContinuidad
     | Array Tkn_period funcionContinuidad  ;
@@ -126,8 +127,8 @@ EndSub: 'EndSub';
 Array: 'Array';
 Stack: 'Stack';
 Program: 'Program';
-True: '"TRUE"';
-False: '"FALSE"';
+True: '"'[Tt][Rr][Uu][Ee]'"';
+False: '"'[Ff][Aa][Ll][Ss][Ee]'"';
 TextWindow :'TextWindow';
 Or: 'Or';
 And: 'And';

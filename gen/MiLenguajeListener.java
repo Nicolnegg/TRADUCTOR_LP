@@ -1,4 +1,4 @@
-// Generated from D:/Trabajos UN/2023-1/Lenguajes de programación/TRADUCTOR_LP/Grammar\MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from C:/Users/Usuario/OneDrive/Escritorio/Proyecto lenguajes/TRADUCTOR_LP/Grammar\MiLenguaje.g4 by ANTLR 4.12.0
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -106,6 +106,16 @@ public interface MiLenguajeListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitForCondicion(MiLenguajeParser.ForCondicionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link MiLenguajeParser#toCondicion}.
+	 * @param ctx the parse tree
+	 */
+	void enterToCondicion(MiLenguajeParser.ToCondicionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link MiLenguajeParser#toCondicion}.
+	 * @param ctx the parse tree
+	 */
+	void exitToCondicion(MiLenguajeParser.ToCondicionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link MiLenguajeParser#for}.
 	 * @param ctx the parse tree

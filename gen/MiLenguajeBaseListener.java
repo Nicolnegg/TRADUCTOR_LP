@@ -1,4 +1,4 @@
-// Generated from D:/Trabajos UN/2023-1/Lenguajes de programación/TRADUCTOR_LP/Grammar\MiLenguaje.g4 by ANTLR 4.12.0
+// Generated from C:/Users/Usuario/OneDrive/Escritorio/Proyecto lenguajes/TRADUCTOR_LP/Grammar\MiLenguaje.g4 by ANTLR 4.12.0
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -131,6 +131,18 @@ public class MiLenguajeBaseListener implements MiLenguajeListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitForCondicion(MiLenguajeParser.ForCondicionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterToCondicion(MiLenguajeParser.ToCondicionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitToCondicion(MiLenguajeParser.ToCondicionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
