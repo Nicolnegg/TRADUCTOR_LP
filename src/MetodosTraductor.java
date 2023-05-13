@@ -102,7 +102,10 @@ public class MetodosTraductor implements MiLenguajeListener {
                 else{
                     elementIds.add(ctx.Id().getText());
                     System.out.print("\n");
-                    System.out.print(idmult(identacion) + "global " + ctx.Id().getText());
+                    System.out.println(idmult(identacion) + "global " + ctx.Id().getText());
+                    if(ctx.identSentencia()!=null && ctx.identSentencia().arrayAsignaciones()!=null){
+                        System.out.print(idmult(identacion) + ctx.Id().getText()+"={}");
+                    }
                 }
 
             }
