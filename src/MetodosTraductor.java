@@ -1,6 +1,8 @@
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import java.util.ArrayList;
+import java.util.List;
  //revisar import de sleep
 //revisar for y listas en for y booleanos
 //revisar for y listas en for
@@ -9,6 +11,8 @@ public class MetodosTraductor implements MiLenguajeListener {
     int identacion =0;
     int time=0;
     int sys=0;
+
+    List<String> elementIds = new ArrayList<>();
 
     public String idmult(int n){
         String s = "";
@@ -82,14 +86,27 @@ public class MetodosTraductor implements MiLenguajeListener {
             System.out.print("\n");
         }
         else if(ctx.Id()!=null){
-            System.out.print("\n");
-            System.out.print(idmult(identacion) + ctx.Id().getText());
-        }
+            if(!elementIds.contains(ctx.Id().getText())){
+                if(ctx.identSentencia()!=null && ctx.identSentencia().Tkn_left_paren()!=null | ctx.identSentencia().Tkn_colon()!=null){
+                    elementIds.add(ctx.Id().getText());
+                }
+                else{
+                    elementIds.add(ctx.Id().getText());
+                    System.out.print("\n");
+                    System.out.print(idmult(identacion) + "global " + ctx.Id().getText());
+                }
 
+            }
+            System.out.print("\n");
+            if(ctx.identSentencia()!=null && ctx.identSentencia().Tkn_colon()==null){
+                System.out.print(idmult(identacion)+ ctx.Id().getText());
+            }
+        }
     }
 
     @Override
     public void exitSentenciaElse(MiLenguajeParser.SentenciaElseContext ctx) {
+
     }
 
     @Override
@@ -197,6 +214,11 @@ public class MetodosTraductor implements MiLenguajeListener {
     @Override
     public void enterForCondicion(MiLenguajeParser.ForCondicionContext ctx) {
         if (ctx.For() != null) {
+            if(!elementIds.contains(ctx.Id().getText())){
+                elementIds.add(ctx.Id().getText());
+                System.out.print("\n");
+                System.out.print(idmult(identacion) + "global " + ctx.Id().getText());
+            }
             System.out.print("\n");
             System.out.print(idmult(identacion)+"for  ");
             if (ctx.Id() != null) {
