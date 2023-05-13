@@ -1,3 +1,4 @@
+'nicol estefania geuerero
 Sub nicol
     angel()
     angelito = 2+2+12+1246+32534+3423-5+12*54 >3+5-6 And 55>=45-5/6*3 Or 4>7*4
@@ -6,6 +7,9 @@ Sub nicol
         a=3 And 3
         ElseIf (3+8>i+1) Then
             a=3
+            Goto c
+            c:
+            b=2
             a[1]=2
             a[1][2]=2
             a[1][2][3]=2

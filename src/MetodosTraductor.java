@@ -102,6 +102,9 @@ public class MetodosTraductor implements MiLenguajeListener {
                 System.out.print(idmult(identacion)+ ctx.Id().getText());
             }
         }
+        else if(ctx.COMMENT()!=null){
+            System.out.print(idmult(identacion)+ "#"+ctx.COMMENT().getText().substring(1));
+        }
     }
 
     @Override
@@ -114,6 +117,7 @@ public class MetodosTraductor implements MiLenguajeListener {
         if(ctx.Step()!=null){
             System.out.print(',');
         }
+
 
     }
 
