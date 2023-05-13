@@ -1,11 +1,9 @@
-import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.tree.ErrorNode;
-import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.ArrayList;
 import java.util.List;
 public class Visitors extends MiLenguajeBaseVisitor<Void> {
 
     public  List<String> dicDefinido = new ArrayList<>();
+    public  List<String> variables_string = new ArrayList<>();
 
     @Override
     public Void visitFor(MiLenguajeParser.ForContext ctx){
@@ -18,6 +16,20 @@ public class Visitors extends MiLenguajeBaseVisitor<Void> {
     public List<String> getDicDefinido() {
         return dicDefinido;
     }
+
+    public Void visitIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx){
+        String variable = ctx.variable().getText();
+
+        variables_string.add(variable);
+        return super.visitIdentSentencia(ctx);
+
+    }
+
+
+    public List<String> getVariables_string() {
+        return variables_string;
+    }
+
 
 
 }

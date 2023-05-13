@@ -10,6 +10,7 @@ import org.antlr.v4.runtime.tree.*;
 //revisar stack y array
 public class MetodosTraductor implements MiLenguajeListener {
     int identacion =0;
+    boolean isString = false;
     /*int time=0;
     int sys=0;*/
 
@@ -23,18 +24,18 @@ public class MetodosTraductor implements MiLenguajeListener {
         return s;
     }
 
-     @Override
-     public void enterP(MiLenguajeParser.PContext ctx) {
-         System.out.println("import sys");
-         System.out.println("import time");
-     }
+    @Override
+    public void enterP(MiLenguajeParser.PContext ctx) {
+        System.out.println("import sys");
+        System.out.println("import time");
+    }
 
-     @Override
-     public void exitP(MiLenguajeParser.PContext ctx) {
+    @Override
+    public void exitP(MiLenguajeParser.PContext ctx) {
 
-     }
+    }
 
-     @Override
+    @Override
     public void enterInicio(MiLenguajeParser.InicioContext ctx) {
         /*if(ctx.sentenciaElse()!=null){
             if(ctx.sentenciaElse().funcionContinuidad()!=null){
@@ -298,7 +299,31 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx) {
+
+
+        // Obtener el nodo hijo correspondiente al contexto deseado
+        ParseTree subtree_string = ctx;
+        //System.out.print("Contexto(" + ctx.getText() +")");
+        // Crear un Visitor
+        Visitors visitor = new Visitors();
+
+
+        visitor.visit(subtree_string);
+
+
+        List<String> variables = visitor.getVariables_string();
+
+        String texto = variables.get(0);
+
+        for (int i = 0; i < texto.length(); i++) {
+            char c = texto.charAt(i);
+            if (c == '"') {
+                isString = true;
+            }
+        }
+
         String id=ctx.getParent().getChild(0).getText();
+
         if (ctx.Tkn_left_paren() != null) {
             System.out.print("(");
             if (ctx.Tkn_right_paren() != null) {
@@ -327,6 +352,8 @@ public class MetodosTraductor implements MiLenguajeListener {
             }
             else{System.out.print(")");}
         }
+
+        isString = false;
     }
 
     @Override
@@ -370,24 +397,47 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterValor(MiLenguajeParser.ValorContext ctx) {
-        if(ctx.Tkn_left_paren()!=null) {
-            System.out.print('(');
+
+        if(isString == true){
+            if(ctx.Tkn_left_paren()!=null) {
+                System.out.print('(');
+            }
+            else if(ctx.True()!=null) {
+                System.out.print("true");
+            }
+            else if(ctx.False()!=null){
+                System.out.print("false");
+            }
+            else if(ctx.Id()!=null){
+                System.out.print(ctx.Id().getText()+ "_TRA");
+            }
+            else if(ctx.Tkn_number()!=null){
+                System.out.print("str(" + ctx.Tkn_number().getText() +")");
+            }
+            else if(ctx.Tkn_text()!=null){
+                System.out.print(ctx.Tkn_text().getText());
+            }
+        } else if (isString == false){
+            if(ctx.Tkn_left_paren()!=null) {
+                System.out.print('(');
+            }
+            else if(ctx.True()!=null) {
+                System.out.print("true");
+            }
+            else if(ctx.False()!=null){
+                System.out.print("false");
+            }
+            else if(ctx.Id()!=null){
+                System.out.print(ctx.Id().getText()+ "_TRA");
+            }
+            else if(ctx.Tkn_number()!=null){
+                System.out.print(ctx.Tkn_number().getText());
+            }
+            else if(ctx.Tkn_text()!=null){
+                System.out.print(ctx.Tkn_text().getText());
+            }
         }
-        else if(ctx.True()!=null) {
-            System.out.print("true");
-        }
-        else if(ctx.False()!=null){
-            System.out.print("false");
-        }
-        else if(ctx.Id()!=null){
-            System.out.print(ctx.Id().getText()+ "_TRA");
-        }
-        else if(ctx.Tkn_number()!=null){
-            System.out.print(ctx.Tkn_number().getText());
-        }
-        else if(ctx.Tkn_text()!=null){
-            System.out.print(ctx.Tkn_text().getText());
-        }
+
 
 
     }

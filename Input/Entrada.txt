@@ -1,19 +1,10 @@
-n = 3
-factorial_recursivo()
-n = return
-factorial_recursivo()
-TextWindow.WriteLine(return)
 
-Sub factorial_recursivo
-   If (n = 1) Then
-      return = 1
-   Else
-      Stack.PushValue(factorial_params, n)
-      n = n - 1
-      factorial_recursivo()
-      res = return
+a = "angel" + 7
 
-      n = Stack.PopValue(factorial_params)
-      return = n * return
-   EndIf
-EndSub
+a = 7 + "angel"
+
+a = 2
+
+a = 2 +5+7+ id + 124 + false
+
+a = 2 + 2 + 2 + 5 + "a"
