@@ -1,7 +1,10 @@
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
-
+ //revisar import de sleep
+//revisar for y listas en for y booleanos
+//revisar for y listas en for
+//revisar stack y array
 public class MetodosTraductor implements MiLenguajeListener {
     int identacion =0;
     int time=0;
