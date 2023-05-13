@@ -3,7 +3,7 @@
 rows = 8
 
 For i = 0 To rows - 1
-   For space = 1 To rows - i 
+   For space = 1 To rows - i
       TextWindow.Write("   ")
    EndFor
 
@@ -19,4 +19,7 @@ For i = 0 To rows - 1
    EndFor
 
    TextWindow.WriteLine("")
+EndFor
+For space = 1 To 5
+      TextWindow.WriteLine(space)
 EndFor
