@@ -600,6 +600,9 @@ public class MetodosTraductor implements MiLenguajeListener {
         if(ctx.Id().getText().equals("Read")){
             System.out.print(idmult(identacion) + "input");
         }
+        if(ctx.Id().getText().equals("WriteLine")){
+            System.out.print(idmult(identacion) + "print");
+        }
         if(ctx.Tkn_left_paren()!=null){
             System.out.print("(");
         }
