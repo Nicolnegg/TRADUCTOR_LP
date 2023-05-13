@@ -293,31 +293,33 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterArrayAsignacionesCondicion(MiLenguajeParser.ArrayAsignacionesCondicionContext ctx) {
-        if(ctx.Tkn_left_brac()!=null){
-            System.out.print("[");
-        }
     }
 
     @Override
     public void exitArrayAsignacionesCondicion(MiLenguajeParser.ArrayAsignacionesCondicionContext ctx) {
-        if(ctx.Tkn_right_brac()!=null){
+        if(ctx.getParent().getChild(1).getText().charAt(0)!='='){
             System.out.print("]");
         }
     }
 
     @Override
     public void enterArrayAsignaciones(MiLenguajeParser.ArrayAsignacionesContext ctx) {
+        if(ctx.arrayAsignaciones()!=null && ctx.arrayAsignaciones().Tkn_equals()!=null){
+            System.out.print("={");
+        }
+        else if(ctx.arrayAsignacionesCondicion()!=null && ctx.arrayAsignacionesCondicion().Tkn_left_brac()!=null){
+            System.out.print("[");
+        }
         if (ctx.Tkn_equals() != null){
-            System.out.print("=");
+            System.out.print(":");
         }
     }
 
-
-
-
     @Override
     public void exitArrayAsignaciones(MiLenguajeParser.ArrayAsignacionesContext ctx) {
-
+        if(ctx.arrayAsignaciones()==null){
+            System.out.print("}");
+        }
     }
 
     @Override
