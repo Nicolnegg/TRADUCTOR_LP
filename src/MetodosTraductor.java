@@ -105,7 +105,7 @@ public class MetodosTraductor implements MiLenguajeListener {
             }
         }
         else if(ctx.COMMENT()!=null){
-            System.out.print(idmult(identacion)+ "#"+ctx.COMMENT().getText().substring(1));
+            System.out.println(idmult(identacion)+ "#"+ctx.COMMENT().getText().substring(1));
         }
     }
 
