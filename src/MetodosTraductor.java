@@ -17,28 +17,34 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterInicio(MiLenguajeParser.InicioContext ctx) {
-        if(ctx.sentenciaElse().funcionContinuidad().Id()!=null){
-            if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("Delay")){
-                if(time==0){
-                    System.out.print("\n");
-                    System.out.print("import time");
-                    time+=1;
+        if(ctx.sentenciaElse()!=null){
+            if(ctx.sentenciaElse().funcionContinuidad()!=null){
+                if(ctx.sentenciaElse().funcionContinuidad().Id()!=null){
+                    if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("Delay")){
+                        if(time==0){
+                            System.out.print("\n");
+                            System.out.print("import time");
+                            time+=1;
+                        }
+                    }
+                    else if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("End")){
+                        if(sys==0){
+                            System.out.print("\n");
+                            System.out.print("import sys");
+                            sys+=1;
+                        }
+                    }
+                    else if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("Delay")){
+                        if(time==0){
+                            System.out.print("\n");
+                            System.out.print("import time");
+                            time+=1;
+                        }
+                    }
+
                 }
             }
-            if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("End")){
-                if(sys==0){
-                    System.out.print("\n");
-                    System.out.print("import sys");
-                    sys+=1;
-                }
-            }
-            if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("Delay")){
-                if(time==0){
-                    System.out.print("\n");
-                    System.out.print("import time");
-                    time+=1;
-                }
-            }
+
 
         }
     }

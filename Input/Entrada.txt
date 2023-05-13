@@ -1,1 +1,1 @@
-Program.Delay(5)
+x=5
