@@ -13,7 +13,6 @@ public class MetodosTraductor implements MiLenguajeListener {
     int sys=0;*/
 
     List<String> elementIds = new ArrayList<>();
-
     public String idmult(int n){
         String s = "";
         for (int i = 1; i <= n; i++) {
@@ -22,10 +21,19 @@ public class MetodosTraductor implements MiLenguajeListener {
         return s;
     }
 
-    @Override
+     @Override
+     public void enterP(MiLenguajeParser.PContext ctx) {
+         System.out.println("import sys");
+         System.out.println("import time");
+     }
+
+     @Override
+     public void exitP(MiLenguajeParser.PContext ctx) {
+
+     }
+
+     @Override
     public void enterInicio(MiLenguajeParser.InicioContext ctx) {
-        System.out.println("import sys");
-        System.out.println("import time");
         /*if(ctx.sentenciaElse()!=null){
             if(ctx.sentenciaElse().funcionContinuidad()!=null){
                 if(ctx.sentenciaElse().funcionContinuidad().Id()!=null){
@@ -607,7 +615,7 @@ public class MetodosTraductor implements MiLenguajeListener {
             System.out.print(idmult(identacion) + "input");
         }
         if(ctx.Id().getText().equals("Write")){
-            System.out.print(idmult(identacion) + "sys.stdout.write");
+            System.out.print(idmult(identacion) + "sys.stdout.write(str");
         }
         if(ctx.Id().getText().equals("WriteLine")){
             System.out.print(idmult(identacion) + "print");

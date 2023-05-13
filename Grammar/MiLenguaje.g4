@@ -1,7 +1,7 @@
 grammar MiLenguaje;
 
 //sintactico
-
+p: inicio;
 inicio : sentenciaElse sentencia ;
 sentencia: sub inicio
     | EOF ;
