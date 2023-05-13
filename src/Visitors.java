@@ -13,6 +13,7 @@ public class Visitors extends MiLenguajeBaseVisitor<Void> {
         dicDefinido.add(id);
         System.out.println(id);
         return super.visitFor(ctx);
+
     }
     public List<String> getDicDefinido() {
         return dicDefinido;
