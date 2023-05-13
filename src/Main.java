@@ -16,7 +16,7 @@ public class Main {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         // create a parser that feeds off the tokens buffer
         MiLenguajeParser parser = new MiLenguajeParser(tokens);
-        ParseTree tree = parser.inicio(); // begin parsing at init rule
+        ParseTree tree = parser.p(); // begin parsing at init rule
 
         // Create a generic parse tree walker that can trigger callbacks
         ParseTreeWalker walker = new ParseTreeWalker();
