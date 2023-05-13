@@ -3,7 +3,6 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.ArrayList;
 import java.util.List;
- //revisar import de sleep
 //revisar for y listas en for y booleanos
 //revisar for y listas en for
 //revisar stack y array
@@ -630,6 +629,9 @@ public class MetodosTraductor implements MiLenguajeListener {
     public void exitFuncionContinuidad(MiLenguajeParser.FuncionContinuidadContext ctx) {
         if(ctx.Tkn_right_paren()!=null){
             System.out.print(")");
+            if(ctx.Id()!=null && ctx.Id().getText().equals("Write") ){
+                System.out.print(")");
+            }
         }
     }
 
