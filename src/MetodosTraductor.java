@@ -3,6 +3,8 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.ArrayList;
 import java.util.List;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
 //revisar for y listas en for y booleanos
 //revisar for y listas en for
 //revisar stack y array
@@ -270,6 +272,22 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterFor(MiLenguajeParser.ForContext ctx) {
+        // Obtener el nodo hijo correspondiente al contexto deseado
+        ParseTree subtree = ctx.getParent();
+
+        // Crear un Visitor
+        Visitors visitor = new Visitors();
+
+        // Visitar el subárbol con el Visitor
+        visitor.visit(subtree);
+        // Obtener la lista de identificadores
+        List<String> ids = visitor.getDicDefinido();
+        System.out.println(ids );
+        // Imprimir los identificadores encontrados
+        for (String id : ids) {
+            System.out.println(id);
+        }
+        System.out.println("entro al for");
     }
 
     @Override
