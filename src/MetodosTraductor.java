@@ -13,8 +13,8 @@ public class MetodosTraductor implements MiLenguajeListener {
 
 
     int identacion =0;
-    int time=0;
-    int sys=0;
+    /*int time=0;
+    int sys=0;*/
 
      public boolean isStringAssignment = false;
 
@@ -51,7 +51,9 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterInicio(MiLenguajeParser.InicioContext ctx) {
-        if(ctx.sentenciaElse()!=null){
+        System.out.println("import sys");
+        System.out.println("import time");
+        /*if(ctx.sentenciaElse()!=null){
             if(ctx.sentenciaElse().funcionContinuidad()!=null){
                 if(ctx.sentenciaElse().funcionContinuidad().Id()!=null){
                     if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("Delay")){
@@ -61,18 +63,18 @@ public class MetodosTraductor implements MiLenguajeListener {
                             time+=1;
                         }
                     }
-                    else if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("End")){
+                    if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("End")){
                         if(sys==0){
                             System.out.print("\n");
                             System.out.print("import sys");
                             sys+=1;
                         }
                     }
-                    else if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("Delay")){
-                        if(time==0){
+                    if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("Write")){
+                        if(sys==0){
                             System.out.print("\n");
-                            System.out.print("import time");
-                            time+=1;
+                            System.out.print("import sys");
+                            sys+=1;
                         }
                     }
 
@@ -80,7 +82,7 @@ public class MetodosTraductor implements MiLenguajeListener {
             }
 
 
-        }
+        }*/
     }
 
     @Override
@@ -130,7 +132,7 @@ public class MetodosTraductor implements MiLenguajeListener {
             }
         }
         else if(ctx.COMMENT()!=null){
-            System.out.print(idmult(identacion)+ "#"+ctx.COMMENT().getText().substring(1));
+            System.out.println(idmult(identacion)+ "#"+ctx.COMMENT().getText().substring(1));
         }
     }
 
@@ -648,6 +650,9 @@ public class MetodosTraductor implements MiLenguajeListener {
         }
         if(ctx.Id().getText().equals("Read")){
             System.out.print(idmult(identacion) + "input");
+        }
+        if(ctx.Id().getText().equals("Write")){
+            System.out.print(idmult(identacion) + "sys.stdout.write");
         }
         if(ctx.Id().getText().equals("WriteLine")){
             System.out.print(idmult(identacion) + "print");
