@@ -3,6 +3,8 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.ArrayList;
 import java.util.List;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
 //revisar for y listas en for y booleanos
 //revisar for y listas en for
 //revisar stack y array
@@ -12,6 +14,7 @@ public class MetodosTraductor implements MiLenguajeListener {
     int sys=0;*/
 
     List<String> elementIds = new ArrayList<>();
+    List<String> definidos = new ArrayList<>();
     public String idmult(int n){
         String s = "";
         for (int i = 1; i <= n; i++) {
@@ -268,6 +271,22 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterFor(MiLenguajeParser.ForContext ctx) {
+        // Obtener el nodo hijo correspondiente al contexto deseado
+        ParseTree subtree = ctx.getParent();
+
+        // Crear un Visitor
+        Visitors visitor = new Visitors();
+
+        // Visitar el subárbol con el Visitor
+        visitor.visit(subtree);
+        // Obtener la lista de identificadores
+        List<String> ids = visitor.getDicDefinido();
+        System.out.println(ids );
+        // Imprimir los identificadores encontrados
+        for (String id : ids) {
+            System.out.println(id);
+        }
+        System.out.println("entro al for");
     }
 
     @Override
@@ -279,6 +298,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx) {
+        String id=ctx.getParent().getChild(0).getText();
         if (ctx.Tkn_left_paren() != null) {
             System.out.print("(");
             if (ctx.Tkn_right_paren() != null) {
@@ -288,11 +308,25 @@ public class MetodosTraductor implements MiLenguajeListener {
             System.out.print(idmult(identacion) + "#No existe etiquetas en python");
         } else if (ctx.Tkn_equals() != null) {
             System.out.print("=");
+            if(!definidos.contains(id)){
+                definidos.add(id);
+            }
+        }else if(ctx.arrayAsignaciones()!=null){
+            if(!definidos.contains(id)){
+                System.out.print("=");
+            }
+            else{System.out.print(".update(");}
         }
     }
     @Override
     public void exitIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx) {
-
+        String id=ctx.getParent().getChild(0).getText();
+        if(ctx.arrayAsignaciones()!=null){
+            if(!definidos.contains(id)){
+                definidos.add(id);
+            }
+            else{System.out.print(")");}
+        }
     }
 
     @Override
@@ -307,23 +341,21 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterArrayAsignacionesCondicion(MiLenguajeParser.ArrayAsignacionesCondicionContext ctx) {
+        if(ctx.Tkn_left_brac()!=null){
+            System.out.print("{");
+        }
     }
 
     @Override
     public void exitArrayAsignacionesCondicion(MiLenguajeParser.ArrayAsignacionesCondicionContext ctx) {
         if(ctx.getParent().getChild(1).getText().charAt(0)!='='){
-            System.out.print("]");
+            System.out.print(":");
         }
     }
 
     @Override
     public void enterArrayAsignaciones(MiLenguajeParser.ArrayAsignacionesContext ctx) {
-        if(ctx.arrayAsignaciones()!=null && ctx.arrayAsignaciones().Tkn_equals()!=null){
-            System.out.print("={");
-        }
-        else if(ctx.arrayAsignacionesCondicion()!=null && ctx.arrayAsignacionesCondicion().Tkn_left_brac()!=null){
-            System.out.print("[");
-        }
+
         if (ctx.Tkn_equals() != null){
             System.out.print(":");
         }
@@ -331,7 +363,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitArrayAsignaciones(MiLenguajeParser.ArrayAsignacionesContext ctx) {
-        if(ctx.arrayAsignaciones()==null){
+        if(ctx.arrayAsignaciones()!=null){
             System.out.print("}");
         }
     }
