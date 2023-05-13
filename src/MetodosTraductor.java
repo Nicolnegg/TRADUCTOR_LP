@@ -4,6 +4,9 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class MetodosTraductor implements MiLenguajeListener {
     int identacion =0;
+    int time=0;
+    int sys=0;
+
     public String idmult(int n){
         String s = "";
         for (int i = 1; i <= n; i++) {
@@ -14,7 +17,30 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterInicio(MiLenguajeParser.InicioContext ctx) {
+        if(ctx.sentenciaElse().funcionContinuidad().Id()!=null){
+            if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("Delay")){
+                if(time==0){
+                    System.out.print("\n");
+                    System.out.print("import time");
+                    time+=1;
+                }
+            }
+            if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("End")){
+                if(sys==0){
+                    System.out.print("\n");
+                    System.out.print("import sys");
+                    sys+=1;
+                }
+            }
+            if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("Delay")){
+                if(time==0){
+                    System.out.print("\n");
+                    System.out.print("import time");
+                    time+=1;
+                }
+            }
 
+        }
     }
 
     @Override
@@ -38,12 +64,6 @@ public class MetodosTraductor implements MiLenguajeListener {
         }
         else if(ctx.Program()!=null){
             System.out.print("\n");
-            if(ctx.Id().getText().equals("Delay")){
-                System.out.print(idmult(identacion) + "time.sleep");
-            }
-            else{
-                System.out.print(idmult(identacion)+"#No existe Program en python");
-            }
         }
         else if(ctx.Stack()!=null){
             System.out.print("\n");
@@ -51,7 +71,6 @@ public class MetodosTraductor implements MiLenguajeListener {
         }
         else if(ctx.TextWindow()!=null){
             System.out.print("\n");
-            System.out.print(idmult(identacion) + "print");
         }
         else if(ctx.Id()!=null){
             System.out.print("\n");
@@ -82,7 +101,7 @@ public class MetodosTraductor implements MiLenguajeListener {
         if (!ctx.isEmpty()){
             if (ctx.Sub()!=null) {
                 System.out.print("\n");
-                System.out.print("Def ");
+                System.out.print("def ");
                 if (ctx.Id()!=null) {
                     String value = ctx.Id().getText();
                     System.out.print(value +"():");
@@ -257,7 +276,6 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterArrayAsignaciones(MiLenguajeParser.ArrayAsignacionesContext ctx) {
-
         if (ctx.Tkn_equals() != null){
             System.out.print("=");
         }
@@ -540,7 +558,16 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterFuncionContinuidad(MiLenguajeParser.FuncionContinuidadContext ctx) {
-        if(ctx.Tkn_left_paren()!=null){
+        if(ctx.Id().getText().equals("Delay")){
+            System.out.print(idmult(identacion) + "time.sleep");
+        }
+        else if(ctx.Id().getText().equals("End")){
+            System.out.print(idmult(identacion) + "sys.exit");
+        }
+        else if(ctx.Id().getText().equals("Read")){
+            System.out.print(idmult(identacion) + "input");
+        }
+        else if(ctx.Tkn_left_paren()!=null){
             System.out.print("(");
         }
 

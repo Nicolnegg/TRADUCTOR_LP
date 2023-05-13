@@ -1,22 +1,22 @@
 grammar MiLenguaje;
 
-//sitactico
+//sintactico
 
 inicio : sentenciaElse sentencia ;
 sentencia: sub inicio
     | EOF ;
 sentenciaElse : if sentenciaElse
-    |  while sentenciaElse
-    |  for sentenciaElse
+    | while sentenciaElse
+    | for sentenciaElse
     | Goto Id sentenciaElse
     | Program Tkn_period funcionContinuidad sentenciaElse
     | Stack Tkn_period funcionContinuidad sentenciaElse
     | TextWindow Tkn_period funcionContinuidad sentenciaElse
     | Array Tkn_period funcionContinuidad sentenciaElse
-    |Id identSentencia sentenciaElse
+    | Id identSentencia sentenciaElse
     | ;
 stepF: Step variableStep | ;
-sub:Sub Id sentenciaElse EndSub ;
+sub: Sub Id sentenciaElse EndSub ;
 ifCondicion: If Tkn_left_paren variable Tkn_right_paren Then;
 if :  ifCondicion sentenciaIf EndIf;
 whileCondicion: While Tkn_left_paren variable Tkn_right_paren;
