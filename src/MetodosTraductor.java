@@ -262,7 +262,9 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitToCondicion(MiLenguajeParser.ToCondicionContext ctx) {
-
+        if (ctx.To() != null) {
+            System.out.print("+1");
+        }
     }
 
     @Override
