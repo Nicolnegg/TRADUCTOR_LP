@@ -3,16 +3,22 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.ArrayList;
 import java.util.List;
+import org.antlr.v4.runtime.tree.ParseTree;
+
  //revisar import de sleep
 //revisar for y listas en for y booleanos
 //revisar for y listas en for
 //revisar stack y array
 public class MetodosTraductor implements MiLenguajeListener {
+
+
     int identacion =0;
     int time=0;
     int sys=0;
 
-    List<String> elementIds = new ArrayList<>();
+     public boolean isStringAssignment = false;
+
+     List<String> elementIds = new ArrayList<>();
 
     public String idmult(int n){
         String s = "";
@@ -21,6 +27,27 @@ public class MetodosTraductor implements MiLenguajeListener {
         }
         return s;
     }
+
+     public void traverseSentencia(ParseTree tree) {
+         boolean isStringAssignment = false; // Variable booleana para verificar si se encontró un texto
+
+         for (int i = 0; i < tree.getChildCount(); i++) {
+             ParseTree child = tree.getChild(i);
+
+             if (child instanceof MiLenguajeParser.ValorContext) {
+                 MiLenguajeParser.ValorContext valorContext = (MiLenguajeParser.ValorContext) child;
+
+                 if (valorContext.Tkn_text() != null) {
+                     isStringAssignment = true; // Se encontró un texto, se establece la variable a true
+                 }
+             }
+
+             traverseSentencia(child);
+         }
+
+         // Después de recorrer el árbol, puedes imprimir el resultado utilizando el valor de isStringAssignment
+         // Implementa la lógica requerida aquí
+     }
 
     @Override
     public void enterInicio(MiLenguajeParser.InicioContext ctx) {
@@ -279,6 +306,9 @@ public class MetodosTraductor implements MiLenguajeListener {
         } else if (ctx.Tkn_equals() != null) {
             System.out.print("=");
         }
+
+        isStringAssignment = false;
+
     }
     @Override
     public void exitIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx) {
@@ -328,29 +358,44 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterValor(MiLenguajeParser.ValorContext ctx) {
-        if(ctx.Tkn_left_paren()!=null) {
+
+        if (ctx.Tkn_text() != null) {
+            System.out.print(ctx.Tkn_text().getText());
+            if (!isStringAssignment) {
+                this.isStringAssignment = true;
+            }
+        } else if (ctx.Tkn_number() != null) {
+            if (isStringAssignment) {
+                System.out.print("str(" + ctx.Tkn_number().getText() + ")");
+            } else {
+                System.out.print(ctx.Tkn_number().getText());
+            }
+        } else if (ctx.Id() != null) {
+            System.out.print(ctx.Id().getText());
+        } else if (ctx.True() != null) {
+            System.out.print("true");
+        } else if (ctx.False() != null) {
+            System.out.print("false");
+        } else if (ctx.Tkn_left_paren() != null) {
             System.out.print('(');
         }
-        else if(ctx.True()!=null) {
-            System.out.print("true");
+
+        // Llamar a traverseSentencia para recorrer el árbol de la sentencia
+        for (ParseTree child : ctx.getParent().children) {
+            if (child instanceof MiLenguajeParser.ValorContext) {
+                traverseSentencia(child);
+            }
         }
-        else if(ctx.False()!=null){
-            System.out.print("false");
-        }
-        else if(ctx.Id()!=null){
-            System.out.print(ctx.Id().getText());
-        }
-        else if(ctx.Tkn_number()!=null){
-            System.out.print(ctx.Tkn_number().getText());
-        }
-        else if(ctx.Tkn_text()!=null){
-            System.out.print(ctx.Tkn_text().getText());
-        }
+
+
+
 
 
     }
 
-    @Override
+
+
+     @Override
     public void exitValor(MiLenguajeParser.ValorContext ctx) {
         if(ctx.Tkn_right_paren()!=null){
             System.out.print(')');

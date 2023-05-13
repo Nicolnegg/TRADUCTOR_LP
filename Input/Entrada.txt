@@ -1,85 +1,9 @@
-'nicol estefania geuerero
-Sub nicol
-    angel()
-    angelito = 2+2+12+1246+32534+3423-5+12*54 >3+5-6 And 55>=45-5/6*3 Or 4>7*4
-    Manuel = 46 -2 <= 62+12 Or 25
-    If (3>=6)Then
-        a=3 And 3
-        ElseIf (3+8>i+1) Then
-            a=3
-            Goto c
-            c:
-            b=2
-            a[1]=2
-            a[1][2]=2
-            a[1][2][3]=2
-        Else
-            a=5+3-(7)
-            While (i=5)
-                Goto a
-                If (3>=6)Then
-                    ElseIf (3+8>i) Then
-                        a=8=TextWindow.s(5,6,8,"nivol",)
-                        If (3>=6)Then
-                            ElseIf (3+8>i) Then
-                                a=8=TextWindow.s(5,6,8,"nivol",)
-                                a=3
-                            Else
-                                a=5+3-(7)
-                        EndIf
-                    Else
-                        a=5+3-(7)
-                    If (3>=6)Then
-                        ElseIf (3+8>i) Then
-                            a=8=TextWindow.s(5,6,8,"nivol",)
-                        Else
-                            a=5+3-(7)
-                    EndIf
-                EndIf
-            EndWhile
-    EndIf
-EndSub
-a=3-(-(-3))
-a=a[2]/a[2]["nicol"][3]+6> "False"
-For i=3 To 4
-    a=5
-    a:
-    If (i=4)Then
-        For i=4 To 4
-            If (3>=6)Then
-            ElseIf (3+8>i) Then
-                a=8=TextWindow.s(5,6,8,"nivol",)
-            Else
-                a=5+3-(7)
-            EndIf
-            While (i=5)
-                For i=4 To 4 Step 2
-                    a=5
-                EndFor
-                Goto a
-                If (3>=6)Then
-                ElseIf (3+8>i) Then
-                    a=8=TextWindow.s(5,6,8,"nivol",)
-                    If (3>=6)Then
-                    ElseIf (3+8>i) Then
-                        a=8=TextWindow.s(5,6,8,"nivol",)
-                    Else
-                        a=5+3-(7)
+a = "1" + 1 + "Angel"
 
-                    EndIf
-                Else
-                        a=5+3-(7)
-                    If (3>=6)Then
-                    ElseIf (3+8>i) Then
-                    a=8=TextWindow.s(5,6,8,"nivol",)
-                    Else
-                        a=5+3-(7)
-                    EndIf
-                EndIf
-            EndWhile
+b = "Angel" + "2" + 2
 
-            If (i=4)Then
-            EndIf
-        EndFor
-    EndIf
-EndFor
+r = 2 + "Rey"
+
+x = 2
+
+x = 1 + 5 + 2

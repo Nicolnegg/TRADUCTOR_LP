@@ -23,6 +23,8 @@ public class Main {
         // Walk the tree created during the parse, trigger callbacks
         walker.walk(new MetodosTraductor(), tree);
         System.out.println(); // print a \n after translation
+
+
     }
 }
 
