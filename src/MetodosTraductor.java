@@ -89,7 +89,6 @@ public class MetodosTraductor implements MiLenguajeListener {
         }
         else if(ctx.Stack()!=null){
             System.out.print("\n");
-            System.out.print(idmult(identacion)+"#No existe stack en python");
         }
         else if(ctx.TextWindow()!=null){
             System.out.print("\n");
@@ -102,13 +101,13 @@ public class MetodosTraductor implements MiLenguajeListener {
                 else{
                     elementIds.add(ctx.Id().getText());
                     System.out.print("\n");
-                    System.out.print(idmult(identacion) + "global " + ctx.Id().getText());
+                    System.out.print(idmult(identacion) + "global " + ctx.Id().getText() + "_TRA");
                 }
 
             }
             System.out.print("\n");
             if(ctx.identSentencia()!=null && ctx.identSentencia().Tkn_colon()==null){
-                System.out.print(idmult(identacion)+ ctx.Id().getText());
+                System.out.print(idmult(identacion)+ ctx.Id().getText() + "_TRA");
             }
         }
         else if(ctx.COMMENT()!=null){
@@ -230,12 +229,12 @@ public class MetodosTraductor implements MiLenguajeListener {
             if(!elementIds.contains(ctx.Id().getText())){
                 elementIds.add(ctx.Id().getText());
                 System.out.print("\n");
-                System.out.print(idmult(identacion) + "global " + ctx.Id().getText());
+                System.out.print(idmult(identacion) + "global " + ctx.Id().getText()+ "_TRA");
             }
             System.out.print("\n");
             System.out.print(idmult(identacion)+"for  ");
             if (ctx.Id() != null) {
-                System.out.print(ctx.Id().getText());
+                System.out.print(ctx.Id().getText()+ "_TRA");
                 if (ctx.Tkn_equals() != null) {
                     System.out.print(" in range (");
                 }
@@ -349,7 +348,7 @@ public class MetodosTraductor implements MiLenguajeListener {
             System.out.print("false");
         }
         else if(ctx.Id()!=null){
-            System.out.print(ctx.Id().getText());
+            System.out.print(ctx.Id().getText()+ "_TRA");
         }
         else if(ctx.Tkn_number()!=null){
             System.out.print(ctx.Tkn_number().getText());
@@ -621,6 +620,7 @@ public class MetodosTraductor implements MiLenguajeListener {
         if(ctx.Id().getText().equals("WriteLine")){
             System.out.print(idmult(identacion) + "print");
         }
+
         if(ctx.Tkn_left_paren()!=null){
             System.out.print("(");
         }
