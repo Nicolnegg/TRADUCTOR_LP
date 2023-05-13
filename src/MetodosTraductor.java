@@ -561,13 +561,13 @@ public class MetodosTraductor implements MiLenguajeListener {
         if(ctx.Id().getText().equals("Delay")){
             System.out.print(idmult(identacion) + "time.sleep");
         }
-        else if(ctx.Id().getText().equals("End")){
+        if(ctx.Id().getText().equals("End")){
             System.out.print(idmult(identacion) + "sys.exit");
         }
-        else if(ctx.Id().getText().equals("Read")){
+        if(ctx.Id().getText().equals("Read")){
             System.out.print(idmult(identacion) + "input");
         }
-        else if(ctx.Tkn_left_paren()!=null){
+        if(ctx.Tkn_left_paren()!=null){
             System.out.print("(");
         }
 
