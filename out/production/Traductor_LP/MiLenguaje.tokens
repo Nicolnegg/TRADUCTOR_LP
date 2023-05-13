@@ -39,8 +39,9 @@ Or=38
 And=39
 Tkn_number=40
 Tkn_text=41
-ESPACIO=42
-Id=43
+COMMENT=42
+ESPACIO=43
+Id=44
 '='=1
 '.'=2
 ','=3

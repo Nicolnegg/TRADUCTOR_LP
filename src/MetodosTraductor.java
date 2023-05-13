@@ -1,9 +1,19 @@
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
-
+import java.util.ArrayList;
+import java.util.List;
+ //revisar import de sleep
+//revisar for y listas en for y booleanos
+//revisar for y listas en for
+//revisar stack y array
 public class MetodosTraductor implements MiLenguajeListener {
     int identacion =0;
+    int time=0;
+    int sys=0;
+
+    List<String> elementIds = new ArrayList<>();
+
     public String idmult(int n){
         String s = "";
         for (int i = 1; i <= n; i++) {
@@ -14,7 +24,36 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterInicio(MiLenguajeParser.InicioContext ctx) {
+        if(ctx.sentenciaElse()!=null){
+            if(ctx.sentenciaElse().funcionContinuidad()!=null){
+                if(ctx.sentenciaElse().funcionContinuidad().Id()!=null){
+                    if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("Delay")){
+                        if(time==0){
+                            System.out.print("\n");
+                            System.out.print("import time");
+                            time+=1;
+                        }
+                    }
+                    else if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("End")){
+                        if(sys==0){
+                            System.out.print("\n");
+                            System.out.print("import sys");
+                            sys+=1;
+                        }
+                    }
+                    else if(ctx.sentenciaElse().funcionContinuidad().Id().getText().equals("Delay")){
+                        if(time==0){
+                            System.out.print("\n");
+                            System.out.print("import time");
+                            time+=1;
+                        }
+                    }
 
+                }
+            }
+
+
+        }
     }
 
     @Override
@@ -38,12 +77,6 @@ public class MetodosTraductor implements MiLenguajeListener {
         }
         else if(ctx.Program()!=null){
             System.out.print("\n");
-            if(ctx.Id().getText().equals("Delay")){
-                System.out.print(idmult(identacion) + "time.sleep");
-            }
-            else{
-                System.out.print(idmult(identacion)+"#No existe Program en python");
-            }
         }
         else if(ctx.Stack()!=null){
             System.out.print("\n");
@@ -51,17 +84,32 @@ public class MetodosTraductor implements MiLenguajeListener {
         }
         else if(ctx.TextWindow()!=null){
             System.out.print("\n");
-            System.out.print(idmult(identacion) + "print");
         }
         else if(ctx.Id()!=null){
-            System.out.print("\n");
-            System.out.print(idmult(identacion) + ctx.Id().getText());
-        }
+            if(!elementIds.contains(ctx.Id().getText())){
+                if(ctx.identSentencia()!=null && ctx.identSentencia().Tkn_left_paren()!=null | ctx.identSentencia().Tkn_colon()!=null){
+                    elementIds.add(ctx.Id().getText());
+                }
+                else{
+                    elementIds.add(ctx.Id().getText());
+                    System.out.print("\n");
+                    System.out.print(idmult(identacion) + "global " + ctx.Id().getText());
+                }
 
+            }
+            System.out.print("\n");
+            if(ctx.identSentencia()!=null && ctx.identSentencia().Tkn_colon()==null){
+                System.out.print(idmult(identacion)+ ctx.Id().getText());
+            }
+        }
+        else if(ctx.COMMENT()!=null){
+            System.out.print(idmult(identacion)+ "#"+ctx.COMMENT().getText().substring(1));
+        }
     }
 
     @Override
     public void exitSentenciaElse(MiLenguajeParser.SentenciaElseContext ctx) {
+
     }
 
     @Override
@@ -69,6 +117,7 @@ public class MetodosTraductor implements MiLenguajeListener {
         if(ctx.Step()!=null){
             System.out.print(',');
         }
+
 
     }
 
@@ -82,7 +131,7 @@ public class MetodosTraductor implements MiLenguajeListener {
         if (!ctx.isEmpty()){
             if (ctx.Sub()!=null) {
                 System.out.print("\n");
-                System.out.print("Def ");
+                System.out.print("def ");
                 if (ctx.Id()!=null) {
                     String value = ctx.Id().getText();
                     System.out.print(value +"():");
@@ -169,6 +218,11 @@ public class MetodosTraductor implements MiLenguajeListener {
     @Override
     public void enterForCondicion(MiLenguajeParser.ForCondicionContext ctx) {
         if (ctx.For() != null) {
+            if(!elementIds.contains(ctx.Id().getText())){
+                elementIds.add(ctx.Id().getText());
+                System.out.print("\n");
+                System.out.print(idmult(identacion) + "global " + ctx.Id().getText());
+            }
             System.out.print("\n");
             System.out.print(idmult(identacion)+"for  ");
             if (ctx.Id() != null) {
@@ -243,32 +297,33 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterArrayAsignacionesCondicion(MiLenguajeParser.ArrayAsignacionesCondicionContext ctx) {
-        if(ctx.Tkn_left_brac()!=null){
-            System.out.print("[");
-        }
     }
 
     @Override
     public void exitArrayAsignacionesCondicion(MiLenguajeParser.ArrayAsignacionesCondicionContext ctx) {
-        if(ctx.Tkn_right_brac()!=null){
+        if(ctx.getParent().getChild(1).getText().charAt(0)!='='){
             System.out.print("]");
         }
     }
 
     @Override
     public void enterArrayAsignaciones(MiLenguajeParser.ArrayAsignacionesContext ctx) {
-
+        if(ctx.arrayAsignaciones()!=null && ctx.arrayAsignaciones().Tkn_equals()!=null){
+            System.out.print("={");
+        }
+        else if(ctx.arrayAsignacionesCondicion()!=null && ctx.arrayAsignacionesCondicion().Tkn_left_brac()!=null){
+            System.out.print("[");
+        }
         if (ctx.Tkn_equals() != null){
-            System.out.print("=");
+            System.out.print(":");
         }
     }
 
-
-
-
     @Override
     public void exitArrayAsignaciones(MiLenguajeParser.ArrayAsignacionesContext ctx) {
-
+        if(ctx.arrayAsignaciones()==null){
+            System.out.print("}");
+        }
     }
 
     @Override
@@ -540,6 +595,18 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterFuncionContinuidad(MiLenguajeParser.FuncionContinuidadContext ctx) {
+        if(ctx.Id().getText().equals("Delay")){
+            System.out.print(idmult(identacion) + "time.sleep");
+        }
+        if(ctx.Id().getText().equals("End")){
+            System.out.print(idmult(identacion) + "sys.exit");
+        }
+        if(ctx.Id().getText().equals("Read")){
+            System.out.print(idmult(identacion) + "input");
+        }
+        if(ctx.Id().getText().equals("WriteLine")){
+            System.out.print(idmult(identacion) + "print");
+        }
         if(ctx.Tkn_left_paren()!=null){
             System.out.print("(");
         }
