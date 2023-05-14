@@ -1,16 +1,20 @@
+
 ' Ciclos, etiquetas y ramificaciones
 
-Goto salto
+
 
 TextWindow.WriteLine("Esto no debe imprimirse")
 
-salto:
+
 
 i = 20
-While (i > 0)
-   test3 = i - 3 * (i / 3)
-   test5 = i - 5 * (i / 5)
 
+While (i > 0)
+     
+   test3 = i - 3 * (i / 3)
+   TextWindow.WriteLine(test3)
+   test5 = i - 5 * (i / 5)
+    TextWindow.WriteLine(test5)
    If (test3 = 0 And test5 = 0) Then
       TextWindow.WriteLine(i + " Fizzbuzz")
    ElseIf (test3 = 0) Then
@@ -21,3 +25,27 @@ While (i > 0)
 
    i = i - 1
 EndWhile
+
+TextWindow.WriteLine("")
+TextWindow.WriteLine("- Con etiquetas -")
+TextWindow.WriteLine("")
+
+i = 20
+
+
+test3 = i - 3 * (i / 3)
+test5 = i - 5 * (i / 5)
+
+If (test3 = 0 And test5 = 0) Then
+   TextWindow.WriteLine(i + " Fizzbuzz")
+ElseIf (test3 = 0) Then
+   TextWindow.WriteLine(i + " Fizz")
+ElseIf (test5 = 0) Then
+   TextWindow.WriteLine(i + " Buzz")
+EndIf
+
+i = i - 1
+
+If (i > 0) Then
+   
+EndIf

@@ -616,7 +616,10 @@ public class MetodosTraductor implements MiLenguajeListener {
                         }
                     }
                     else {
-                        if(variables_array.get(i).contains("\"")){
+                        if(variables_array.get(i).contains("\"") ){
+                            if (variables_array.get(i).contains("[")){
+                                return;
+                            }
                             isString = true;
 
                         }
