@@ -283,6 +283,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                     }
                 }
             }
+
             List<String> idsVar = visitor.getIdDefinido();
             if(identacion<=0 ){
                 for (String idVar : idsVar) {
@@ -573,6 +574,10 @@ public class MetodosTraductor implements MiLenguajeListener {
                 String var_arreglo = variables_array.get(0);
                 for (int i = 0; i < var_arreglo.length(); i++) {
                     char c = var_arreglo.charAt(i);
+
+                    if (c == '['){
+                        return;
+                    }
                     if (c == '"') {
                         isString = true;
                     }
