@@ -5,13 +5,12 @@ public class Visitors extends MiLenguajeBaseVisitor<Void> {
     public  List<String> dicDefinido = new ArrayList<>();
     public  List<String> variables_string = new ArrayList<>();
 
-    @Override
-    public Void visitFor(MiLenguajeParser.ForContext ctx){
-        String id = ctx.sentenciaElse().Id().getText();
-        dicDefinido.add(id);
-        System.out.println(id);
-        return super.visitFor(ctx);
-
+    public Void visitSentenciaElse(MiLenguajeParser.SentenciaElseContext ctx){
+        if(ctx.Id()!=null){
+            String id = ctx.Id().getText();
+            dicDefinido.add(id);
+        }
+        return super.visitSentenciaElse(ctx);
     }
     public List<String> getDicDefinido() {
         return dicDefinido;

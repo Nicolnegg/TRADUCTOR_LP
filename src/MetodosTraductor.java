@@ -273,7 +273,7 @@ public class MetodosTraductor implements MiLenguajeListener {
     @Override
     public void enterFor(MiLenguajeParser.ForContext ctx) {
         // Obtener el nodo hijo correspondiente al contexto deseado
-        ParseTree subtree = ctx.getParent();
+        ParseTree subtree = ctx;
 
         // Crear un Visitor
         Visitors visitor = new Visitors();
@@ -283,11 +283,6 @@ public class MetodosTraductor implements MiLenguajeListener {
         // Obtener la lista de identificadores
         List<String> ids = visitor.getDicDefinido();
         System.out.println(ids );
-        // Imprimir los identificadores encontrados
-        for (String id : ids) {
-            System.out.println(id);
-        }
-        System.out.println("entro al for");
     }
 
     @Override

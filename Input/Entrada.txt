@@ -1,10 +1,7 @@
 
-a = "angel" + 7
-
-a = 7 + "angel"
-
-a = 2
-
-a = 2 +5+7+ id + 124 + false
-
-a = 2 + 2 + 2 + 5 + "a"
+For i = 1 To 3
+   userNums[i] = i * 2
+   TextWindow.WriteLine(userNums)
+   userVals[4-i] = (4 * i) / 2
+   userNums[i][i] = i * 2
+EndFor
