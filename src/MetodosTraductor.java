@@ -157,7 +157,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                 System.out.print("def ");
                 if (ctx.Id()!=null) {
                     String value = ctx.Id().getText();
-                    System.out.print(value +"():");
+                    System.out.print(value+ "_TRA" +"():");
                     identacion +=1;
                 }
             }
