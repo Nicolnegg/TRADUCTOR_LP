@@ -93,6 +93,7 @@ public class MetodosTraductor implements MiLenguajeListener {
         }
         else if(ctx.Stack()!=null){
             System.out.print("\n");
+            System.out.print(idmult(identacion)+"# Stack no existe en python");
         }
         else if(ctx.TextWindow()!=null){
             System.out.print("\n");
@@ -102,11 +103,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                 if(ctx.identSentencia()!=null && ctx.identSentencia().Tkn_left_paren()!=null | ctx.identSentencia().Tkn_colon()!=null){
                     elementIds.add(ctx.Id().getText());
                 }
-                else{
-                    elementIds.add(ctx.Id().getText());
-                    System.out.print("\n");
-                    System.out.print(idmult(identacion) + "global " + ctx.Id().getText() + "_TRA");
-                }
+
 
             }
             System.out.print("\n");
@@ -184,7 +181,6 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterIf(MiLenguajeParser.IfContext ctx) {
-
     }
 
     @Override
@@ -241,6 +237,8 @@ public class MetodosTraductor implements MiLenguajeListener {
             for (String idVar : idsVar) {
                 if(!elementIds.contains(idVar)){
                     System.out.print("\n");
+                    System.out.print("global " + idVar + "_TRA");
+                    System.out.print("\n");
                     System.out.print(idVar +"_TRA"+ "=0");
                 }
             }
@@ -256,11 +254,34 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterForCondicion(MiLenguajeParser.ForCondicionContext ctx) {
+        // Obtener el nodo hijo correspondiente al contexto deseado
+        ParseTree subtree = ctx;
+
+        // Crear un Visitor
+        Visitors visitor = new Visitors();
+
+        // Visitar el subárbol con el Visitor
+        visitor.visit(subtree);
+        // Obtener la lista de identificadores
         if (ctx.For() != null) {
-            if(!elementIds.contains(ctx.Id().getText())){
-                elementIds.add(ctx.Id().getText());
-                System.out.print("\n");
-                System.out.print(idmult(identacion) + "global " + ctx.Id().getText()+ "_TRA");
+            List<String> idsDic = visitor.getDicDefinido();
+            if(identacion<=0 ){
+                for (String idDic : idsDic) {
+                    if(!elementIds.contains(idDic)){
+                        System.out.print("\n");
+                        System.out.print(idDic +"_TRA"+ "={}");
+                    }
+                }
+            }
+            List<String> idsVar = visitor.getIdDefinido();
+            if(identacion<=0 ){
+                for (String idVar : idsVar) {
+                    if(!elementIds.contains(idVar)){
+                        System.out.print("\n");
+                        System.out.print("global " + idVar);
+                        System.out.print(idVar +"_TRA"+ "=0");
+                    }
+                }
             }
             System.out.print("\n");
             System.out.print(idmult(identacion)+"for  ");
@@ -308,11 +329,25 @@ public class MetodosTraductor implements MiLenguajeListener {
         // Visitar el subárbol con el Visitor
         visitor.visit(subtree);
         // Obtener la lista de identificadores
-        List<String> ids = visitor.getDicDefinido();
-        System.out.println(ids );
-
-        List<String> ids2 = visitor.getIdDefinido();
-        System.out.println(ids2 );
+        List<String> idsDic = visitor.getDicDefinido();
+        if(identacion<=0 ){
+            for (String idDic : idsDic) {
+                if(!elementIds.contains(idDic)){
+                    System.out.print("\n");
+                    System.out.print(idDic +"_TRA"+ "={}");
+                }
+            }
+        }
+        List<String> idsVar = visitor.getIdDefinido();
+        if(identacion<=0 ){
+            for (String idVar : idsVar) {
+                if(!elementIds.contains(idVar)){
+                    System.out.print("\n");
+                    System.out.print("global " + idVar);
+                    System.out.print(idVar +"_TRA"+ "=0");
+                }
+            }
+        }
     }
 
     @Override
