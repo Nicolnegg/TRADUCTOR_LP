@@ -1,8 +1,21 @@
-mi_dict["Parte " + i] = userNums[i]
+' Estructuras de datos
 
-TextWindow.WriteLine(mi_dict["Parte " + i] - x + y)
+tamaño_del_arreglo = 5
 
+For i = 1 To tamaño_del_arreglo
+   userNums[i] = i * 2
+   userVals[4-i] = (4 * i) / 2
+EndFor
 
-a = 2 + id + "angel"
+Stack.PushValue(mi_stack, userNums[3])
+Stack.PushValue(mi_stack, userVals[3])
 
-a = 3
+For i = 1 To tamaño_del_arreglo
+   mi_dict["Parte " + i] = userNums[i]
+EndFor
+
+y = Stack.PopValue(mi_stack)
+x = Stack.PopValue(mi_stack)
+
+For i = 1 To tamaño_del_arreglo
+   TextWindow.WriteLine(mi_dict["Parte " + i] - x + y)
