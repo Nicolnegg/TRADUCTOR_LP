@@ -12,6 +12,7 @@ public class MetodosTraductor implements MiLenguajeListener {
     int identacion =0;
     boolean isString = false;
     boolean subs=false;
+    boolean esta_sub=false;
     /*int time=0;
     int sys=0;*/
 
@@ -95,7 +96,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterSentenciaElse(MiLenguajeParser.SentenciaElseContext ctx) {
-        if(subs==false){
+        if((subs==false |(subs==true && esta_sub == false) )){
             if(ctx.Goto()!=null){
                 System.out.print("\n");
                 System.out.print(idmult(identacion)+"#No existe etiquetas en python");
@@ -140,7 +141,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterStepF(MiLenguajeParser.StepFContext ctx) {
-        if(ctx.Step()!=null && subs==false){
+        if(ctx.Step()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print(',');
         }
 
@@ -154,7 +155,8 @@ public class MetodosTraductor implements MiLenguajeListener {
     @Override
     public void enterSub(MiLenguajeParser.SubContext ctx) {
         if (!ctx.isEmpty()){
-            if (ctx.Sub()!=null && subs==false) {
+            esta_sub=true;
+            if (ctx.Sub()!=null && ((subs==false |(subs==true && esta_sub == false) ))) {
                 System.out.print("\n");
                 System.out.print("def ");
                 if (ctx.Id()!=null) {
@@ -168,14 +170,16 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitSub(MiLenguajeParser.SubContext ctx) {
-        if (ctx.EndSub()!=null && subs==false) {
+        if (ctx.EndSub()!=null && (subs==false |(subs==true && esta_sub == false) )) {
             identacion -=1;
+
         }
+        esta_sub=false;
     }
 
     @Override
     public void enterIfCondicion(MiLenguajeParser.IfCondicionContext ctx) {
-        if (ctx.If() != null && subs==false) {
+        if (ctx.If() != null && (subs==false |(subs==true && esta_sub == false) )) {
             System.out.print("\n");
             System.out.print(idmult(identacion)+"if ");
             if (ctx.Tkn_left_paren() != null) {
@@ -186,7 +190,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitIfCondicion(MiLenguajeParser.IfCondicionContext ctx) {
-        if (ctx.Tkn_right_paren() != null && subs==false) {
+        if (ctx.Tkn_right_paren() != null && (subs==false |(subs==true && esta_sub == false) )) {
             System.out.print(")");
             if (ctx.Then() != null) {
                 System.out.print(":");
@@ -202,14 +206,14 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitIf(MiLenguajeParser.IfContext ctx) {
-        if (ctx.EndIf()!=null && subs==false) {
+        if (ctx.EndIf()!=null && (subs==false |(subs==true && esta_sub == false) )) {
             identacion -=1;
         }
     }
 
     @Override
     public void enterWhileCondicion(MiLenguajeParser.WhileCondicionContext ctx) {
-        if (ctx.While() != null && subs==false) {
+        if (ctx.While() != null && (subs==false |(subs==true && esta_sub == false) )) {
             System.out.print("\n");
             System.out.print(idmult(identacion)+"while  ");
             if (ctx.Tkn_left_paren() != null) {
@@ -221,7 +225,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitWhileCondicion(MiLenguajeParser.WhileCondicionContext ctx) {
-        if (ctx.Tkn_right_paren() != null && subs==false) {
+        if (ctx.Tkn_right_paren() != null && (subs==false |(subs==true && esta_sub == false) )) {
             System.out.print(")");
             System.out.print(":");
             identacion +=1;
@@ -231,7 +235,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterWhile(MiLenguajeParser.WhileContext ctx) {
-        if(subs==false){
+        if((subs==false |(subs==true && esta_sub == false) )){
             // Obtener el nodo hijo correspondiente al contexto deseado
             ParseTree subtree = ctx;
 
@@ -265,14 +269,14 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitWhile(MiLenguajeParser.WhileContext ctx) {
-        if (ctx.EndWhile()!=null && subs==false) {
+        if (ctx.EndWhile()!=null && (subs==false |(subs==true && esta_sub == false) )) {
             identacion -= 1;
         }
     }
 
     @Override
     public void enterForCondicion(MiLenguajeParser.ForCondicionContext ctx) {
-        if (ctx.For() != null && subs==false) {
+        if (ctx.For() != null && (subs==false |(subs==true && esta_sub == false) )) {
             if(!elementIds.contains(ctx.Id().getText())){
                 elementIds.add(ctx.Id().getText());
                 System.out.print("\n");
@@ -291,7 +295,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitForCondicion(MiLenguajeParser.ForCondicionContext ctx) {
-        if(ctx.stepF()!=null && subs==false){
+        if(ctx.stepF()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print("):");
         }
 
@@ -299,7 +303,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterToCondicion(MiLenguajeParser.ToCondicionContext ctx) {
-        if (ctx.To() != null) {
+        if (ctx.To() != null && (subs==false |(subs==true && esta_sub == false) )) {
             System.out.print(",");
             identacion +=1;
         }
@@ -308,90 +312,94 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitToCondicion(MiLenguajeParser.ToCondicionContext ctx) {
-        if (ctx.To() != null) {
+        if (ctx.To() != null && (subs==false |(subs==true && esta_sub == false) )) {
             System.out.print("+1");
         }
     }
 
     @Override
     public void enterFor(MiLenguajeParser.ForContext ctx) {
-        // Obtener el nodo hijo correspondiente al contexto deseado
-        ParseTree subtree = ctx;
+        if((subs==false |(subs==true && esta_sub == false) )){ // Obtener el nodo hijo correspondiente al contexto deseado
+            ParseTree subtree = ctx;
 
-        // Crear un Visitor
-        Visitors visitor = new Visitors();
+            // Crear un Visitor
+            Visitors visitor = new Visitors();
 
-        // Visitar el subárbol con el Visitor
-        visitor.visit(subtree);
-        // Obtener la lista de identificadores
-        List<String> ids = visitor.getDicDefinido();
-        System.out.println(ids );
+            // Visitar el subárbol con el Visitor
+            visitor.visit(subtree);
+            // Obtener la lista de identificadores
+            List<String> ids = visitor.getDicDefinido();
+            System.out.println(ids );
 
-        List<String> ids2 = visitor.getIdDefinido();
-        System.out.println(ids2 );
+            List<String> ids2 = visitor.getIdDefinido();
+            System.out.println(ids2 );
+        }
+
     }
 
     @Override
     public void exitFor(MiLenguajeParser.ForContext ctx) {
-        if (ctx.EndFor()!=null) {
+        if (ctx.EndFor()!=null && (subs==false |(subs==true && esta_sub == false) )) {
             identacion -= 1;
         }
     }
 
     @Override
     public void enterIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx) {
+        if((subs==false |(subs==true && esta_sub == false) )){
+            // Obtener el nodo hijo correspondiente al contexto deseado
+            ParseTree subtree_string = ctx;
+            //System.out.print("Contexto(" + ctx.getText() +")");
+            // Crear un Visitor
+            Visitors visitor = new Visitors();
 
 
-        // Obtener el nodo hijo correspondiente al contexto deseado
-        ParseTree subtree_string = ctx;
-        //System.out.print("Contexto(" + ctx.getText() +")");
-        // Crear un Visitor
-        Visitors visitor = new Visitors();
+            visitor.visit(subtree_string);
 
 
-        visitor.visit(subtree_string);
+            List<String> variables = visitor.getVariables_string();
 
+            if (!variables.isEmpty()){
 
-        List<String> variables = visitor.getVariables_string();
+                String texto = variables.get(0);
+                for (int i = 0; i < texto.length(); i++) {
+                    char c = texto.charAt(i);
+                    if (c == '"') {
+                        isString = true;
+                    }
 
-        if (!variables.isEmpty()){
-
-            String texto = variables.get(0);
-            for (int i = 0; i < texto.length(); i++) {
-                char c = texto.charAt(i);
-                if (c == '"') {
-                    isString = true;
                 }
 
-        }
-
-        }
-
-        String id=ctx.getParent().getChild(0).getText();
-
-        if (ctx.Tkn_left_paren() != null) {
-            System.out.print("(");
-            if (ctx.Tkn_right_paren() != null) {
-                System.out.print(")");
             }
-        } else if (ctx.Tkn_colon() != null) {
-            System.out.print(idmult(identacion) + "#No existe etiquetas en python");
-        } else if (ctx.Tkn_equals() != null) {
-            System.out.print("=");
-            if(!definidos.contains(id)){
-                definidos.add(id);
-            }
-        }else if(ctx.arrayAsignaciones()!=null){
-            if(!definidos.contains(id)){
+
+            String id=ctx.getParent().getChild(0).getText();
+
+            if (ctx.Tkn_left_paren() != null) {
+                System.out.print("(");
+                if (ctx.Tkn_right_paren() != null) {
+                    System.out.print(")");
+                }
+            } else if (ctx.Tkn_colon() != null) {
+                System.out.print(idmult(identacion) + "#No existe etiquetas en python");
+            } else if (ctx.Tkn_equals() != null) {
                 System.out.print("=");
+                if(!definidos.contains(id)){
+                    definidos.add(id);
+                }
+            }else if(ctx.arrayAsignaciones()!=null){
+                if(!definidos.contains(id)){
+                    System.out.print("=");
+                }
+                else{System.out.print(".update(");}
             }
-            else{System.out.print(".update(");}
         }
+
+
     }
     @Override
     public void exitIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx) {
         String id=ctx.getParent().getChild(0).getText();
-        if(ctx.arrayAsignaciones()!=null){
+        if(ctx.arrayAsignaciones()!=null && (subs==false |(subs==true && esta_sub == false) )){
             if(!definidos.contains(id)){
                 definidos.add(id);
             }
@@ -413,14 +421,14 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterArrayAsignacionesCondicion(MiLenguajeParser.ArrayAsignacionesCondicionContext ctx) {
-        if(ctx.Tkn_left_brac()!=null){
+        if(ctx.Tkn_left_brac()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print("{");
         }
     }
 
     @Override
     public void exitArrayAsignacionesCondicion(MiLenguajeParser.ArrayAsignacionesCondicionContext ctx) {
-        if(ctx.getParent().getChild(1).getText().charAt(0)!='='){
+        if(ctx.getParent().getChild(1).getText().charAt(0)!='=' && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print(":");
         }
     }
@@ -428,14 +436,14 @@ public class MetodosTraductor implements MiLenguajeListener {
     @Override
     public void enterArrayAsignaciones(MiLenguajeParser.ArrayAsignacionesContext ctx) {
 
-        if (ctx.Tkn_equals() != null){
+        if (ctx.Tkn_equals() != null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print(":");
         }
     }
 
     @Override
     public void exitArrayAsignaciones(MiLenguajeParser.ArrayAsignacionesContext ctx) {
-        if(ctx.arrayAsignaciones()!=null){
+        if(ctx.arrayAsignaciones()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print("}");
         }
     }
@@ -443,7 +451,7 @@ public class MetodosTraductor implements MiLenguajeListener {
     @Override
     public void enterValor(MiLenguajeParser.ValorContext ctx) {
 
-        if(isString == true){
+        if(isString == true && (subs==false |(subs==true && esta_sub == false) )){
             if(ctx.Tkn_left_paren()!=null) {
                 System.out.print('(');
             }
@@ -462,7 +470,7 @@ public class MetodosTraductor implements MiLenguajeListener {
             else if(ctx.Tkn_text()!=null){
                 System.out.print(ctx.Tkn_text().getText());
             }
-        } else if (isString == false){
+        } else if (isString == false && (subs==false |(subs==true && esta_sub == false) )){
             if(ctx.Tkn_left_paren()!=null) {
                 System.out.print('(');
             }
@@ -489,14 +497,14 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitValor(MiLenguajeParser.ValorContext ctx) {
-        if(ctx.Tkn_right_paren()!=null){
+        if(ctx.Tkn_right_paren()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print(')');
         }
     }
 
     @Override
     public void enterVariable(MiLenguajeParser.VariableContext ctx) {
-        if(ctx.Tkn_minus()!=null){
+        if(ctx.Tkn_minus()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print("-");
         }
 
@@ -510,14 +518,14 @@ public class MetodosTraductor implements MiLenguajeListener {
     @Override
     public void enterArrayOperacionCondicion(MiLenguajeParser.ArrayOperacionCondicionContext ctx) {
 
-        if(ctx.Tkn_left_brac()!=null){
+        if(ctx.Tkn_left_brac()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print("[");
         }
     }
 
     @Override
     public void exitArrayOperacionCondicion(MiLenguajeParser.ArrayOperacionCondicionContext ctx) {
-        if(ctx.Tkn_right_brac()!=null){
+        if(ctx.Tkn_right_brac()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print("]");
         }
     }
@@ -534,56 +542,58 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterOperaciones(MiLenguajeParser.OperacionesContext ctx) {
+        if((subs==false |(subs==true && esta_sub == false) )){
+            if(ctx.Tkn_div()!=null){
+                System.out.print("/");
+            }
 
-        if(ctx.Tkn_div()!=null){
-            System.out.print("/");
+            else if(ctx.Tkn_minus()!=null){
+                System.out.print("-");
+            }
+
+
+            else if(ctx.Tkn_plus()!=null){
+                System.out.print("+");
+            }
+
+            else if(ctx.Tkn_times()!=null){
+                System.out.print("*");
+            }
+
+            else if(ctx.Or()!=null){
+                System.out.print(" or ");
+            }
+
+            else if(ctx.And()!=null){
+                System.out.print(" and ");
+            }
+
+            else if(ctx.Tkn_equals()!=null){
+                System.out.print("==");
+            }
+
+            else if(ctx.Tkn_leq()!=null){
+                System.out.print("<=");
+            }
+
+            else if(ctx.Tkn_diff()!=null){
+                System.out.print("!=");
+            }
+
+
+            else if(ctx.Tkn_geq()!=null){
+                System.out.print(">=");
+            }
+
+            else if(ctx.Tkn_less()!=null){
+                System.out.print("<");
+            }
+
+            else if(ctx.Tkn_greater()!=null){
+                System.out.print(">");
+            }
         }
 
-        else if(ctx.Tkn_minus()!=null){
-            System.out.print("-");
-        }
-
-
-        else if(ctx.Tkn_plus()!=null){
-            System.out.print("+");
-        }
-
-        else if(ctx.Tkn_times()!=null){
-            System.out.print("*");
-        }
-
-        else if(ctx.Or()!=null){
-            System.out.print(" or ");
-        }
-
-        else if(ctx.And()!=null){
-            System.out.print(" and ");
-        }
-
-        else if(ctx.Tkn_equals()!=null){
-            System.out.print("==");
-        }
-
-        else if(ctx.Tkn_leq()!=null){
-            System.out.print("<=");
-        }
-
-        else if(ctx.Tkn_diff()!=null){
-            System.out.print("!=");
-        }
-
-
-        else if(ctx.Tkn_geq()!=null){
-            System.out.print(">=");
-        }
-
-        else if(ctx.Tkn_less()!=null){
-            System.out.print("<");
-        }
-
-        else if(ctx.Tkn_greater()!=null){
-            System.out.print(">");
-        }
 
 
     }
@@ -595,40 +605,43 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterOperacionesLog(MiLenguajeParser.OperacionesLogContext ctx) {
-        if(ctx.Tkn_div()!=null){
-            System.out.print("/");
+        if((subs==false |(subs==true && esta_sub == false) )){
+            if(ctx.Tkn_div()!=null){
+                System.out.print("/");
+            }
+
+            else if(ctx.Tkn_minus()!=null){
+                System.out.print("-");
+            }
+
+
+            else if(ctx.Tkn_plus()!=null){
+                System.out.print("+");
+            }
+
+            else if(ctx.Tkn_times()!=null){
+                System.out.print("*");
+            }
+
+            else if(ctx.Or()!=null){
+                System.out.print(" or ");
+            }
+
+            else if(ctx.And()!=null){
+                System.out.print(" and ");
+            }
+
+
+
+            else if(ctx.Tkn_plus()!=null){
+                System.out.print("+");
+            }
+
+            else if(ctx.Tkn_times()!=null){
+                System.out.print("*");
+            }
         }
 
-        else if(ctx.Tkn_minus()!=null){
-            System.out.print("-");
-        }
-
-
-        else if(ctx.Tkn_plus()!=null){
-            System.out.print("+");
-        }
-
-        else if(ctx.Tkn_times()!=null){
-            System.out.print("*");
-        }
-
-        else if(ctx.Or()!=null){
-            System.out.print(" or ");
-        }
-
-        else if(ctx.And()!=null){
-            System.out.print(" and ");
-        }
-
-
-
-        else if(ctx.Tkn_plus()!=null){
-            System.out.print("+");
-        }
-
-        else if(ctx.Tkn_times()!=null){
-            System.out.print("*");
-        }
     }
 
     @Override
@@ -638,11 +651,11 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterOperacionesStep(MiLenguajeParser.OperacionesStepContext ctx) {
-        if(ctx.Tkn_div()!=null){
+        if(ctx.Tkn_div()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print("/");
         }
 
-        else if(ctx.Tkn_minus()!=null){
+        else if(ctx.Tkn_minus()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print("-");
         }
 
@@ -655,7 +668,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterVariableLog(MiLenguajeParser.VariableLogContext ctx) {
-        if(ctx.Tkn_minus()!=null){
+        if(ctx.Tkn_minus()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print("-");
         }
     }
@@ -687,7 +700,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterSentenciaElseIf(MiLenguajeParser.SentenciaElseIfContext ctx) {
-        if(ctx.Else()!=null ){
+        if(ctx.Else()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print("\n");
             System.out.print(idmult(identacion-1) + "else: ");
 
@@ -696,14 +709,14 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitSentenciaElseIf(MiLenguajeParser.SentenciaElseIfContext ctx) {
-        if(ctx.Else()!=null){
+        if(ctx.Else()!=null && (subs==false |(subs==true && esta_sub == false) )){
 
         }
     }
 
     @Override
     public void enterElseifCondicion(MiLenguajeParser.ElseifCondicionContext ctx) {
-        if(ctx.ElseIf()!=null){
+        if(ctx.ElseIf()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print("\n");
             System.out.print(idmult(identacion-1) + "elif ");
             if(ctx.Tkn_left_paren()!=null){
@@ -714,7 +727,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void exitElseifCondicion(MiLenguajeParser.ElseifCondicionContext ctx) {
-        if(ctx.Tkn_right_paren()!=null){
+        if(ctx.Tkn_right_paren()!=null &&(subs==false |(subs==true && esta_sub == false) )){
             System.out.print(")");
             if(ctx.Then()!=null){
                 System.out.print(":");
@@ -732,31 +745,32 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterFuncionContinuidad(MiLenguajeParser.FuncionContinuidadContext ctx) {
-        if(ctx.Id().getText().equals("Delay")){
-            System.out.print(idmult(identacion) + "time.sleep");
-        }
-        if(ctx.Id().getText().equals("End")){
-            System.out.print(idmult(identacion) + "sys.exit");
-        }
-        if(ctx.Id().getText().equals("Read")){
-            System.out.print(idmult(identacion) + "input");
-        }
-        if(ctx.Id().getText().equals("Write")){
-            System.out.print(idmult(identacion) + "sys.stdout.write(str");
-        }
-        if(ctx.Id().getText().equals("WriteLine")){
-            System.out.print(idmult(identacion) + "print");
-        }
+        if((subs==false |(subs==true && esta_sub == false) )){
+            if(ctx.Id().getText().equals("Delay")){
+                System.out.print(idmult(identacion) + "time.sleep");
+            }
+            if(ctx.Id().getText().equals("End")){
+                System.out.print(idmult(identacion) + "sys.exit");
+            }
+            if(ctx.Id().getText().equals("Read")){
+                System.out.print(idmult(identacion) + "input");
+            }
+            if(ctx.Id().getText().equals("Write")){
+                System.out.print(idmult(identacion) + "sys.stdout.write(str");
+            }
+            if(ctx.Id().getText().equals("WriteLine")){
+                System.out.print(idmult(identacion) + "print");
+            }
 
-        if(ctx.Tkn_left_paren()!=null){
-            System.out.print("(");
+            if(ctx.Tkn_left_paren()!=null){
+                System.out.print("(");
+            }
         }
-
     }
 
     @Override
     public void exitFuncionContinuidad(MiLenguajeParser.FuncionContinuidadContext ctx) {
-        if(ctx.Tkn_right_paren()!=null){
+        if(ctx.Tkn_right_paren()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print(")");
             if(ctx.Id()!=null && ctx.Id().getText().equals("Write") ){
                 System.out.print(")");
@@ -766,7 +780,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterFuncionVar(MiLenguajeParser.FuncionVarContext ctx){
-        if(ctx.Tkn_comma()!=null){
+        if(ctx.Tkn_comma()!=null && (subs==false |(subs==true && esta_sub == false) )){
             System.out.print(",");
         }
     }
