@@ -476,7 +476,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                 System.out.print("false");
             }
             else if(ctx.Id()!=null){
-                System.out.print(ctx.Id().getText()+ "_TRA");
+                System.out.print("str("+ctx.Id().getText()+ "_TRA"+")");
             }
             else if(ctx.Tkn_number()!=null){
                 System.out.print("str(" + ctx.Tkn_number().getText() +")");
@@ -518,15 +518,43 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterVariable(MiLenguajeParser.VariableContext ctx) {
-        if(ctx.Tkn_minus()!=null && (subs==false |(subs==true && esta_sub == false) )){
-            System.out.print("-");
+        if( (subs==false |(subs==true && esta_sub == false) )){
+
+            if(ctx.Tkn_minus()!=null) {
+                System.out.print("-");
+            }
+            // Obtener el nodo hijo correspondiente al contexto deseado
+            ParseTree subtree_array = ctx;
+            //System.out.print("Contexto(" + ctx.getText() +")");
+            // Crear un Visitor
+            Visitors visitor = new Visitors();
+
+
+            visitor.visit(subtree_array);
+
+
+            List<String> variables_array = visitor.getVariables_array();
+            if (!variables_array.isEmpty()){
+
+                String var_arreglo = variables_array.get(0);
+                for (int i = 0; i < var_arreglo.length(); i++) {
+                    char c = var_arreglo.charAt(i);
+                    if (c == '"') {
+                        isString = true;
+                    }
+
+                }
+
+            }
         }
 
     }
 
     @Override
     public void exitVariable(MiLenguajeParser.VariableContext ctx) {
-
+        if((subs==false |(subs==true && esta_sub == false) )){
+            isString = false;
+        }
     }
 
     @Override

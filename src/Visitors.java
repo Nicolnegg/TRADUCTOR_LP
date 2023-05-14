@@ -11,6 +11,8 @@ public class Visitors extends MiLenguajeBaseVisitor<Void> {
     public  List<String> idDefinido = new ArrayList<>();
     public  List<String> variables_string = new ArrayList<>();
 
+    public  List<String> variables_array = new ArrayList<>();
+
 
     public Void visitSentenciaElse(MiLenguajeParser.SentenciaElseContext ctx){
         if(ctx.Id()!=null){
@@ -44,8 +46,21 @@ public class Visitors extends MiLenguajeBaseVisitor<Void> {
 
     }
 
+    public Void visitVariable(MiLenguajeParser.VariableContext ctx){
+        if (ctx.valor() != null) {
+            String variable = ctx.valor().getText();
+            variables_array.add(variable);
+        }
+        return super.visitVariable(ctx);
+
+    }
+
     public List<String> getVariables_string() {
         return variables_string;
+    }
+
+    public List<String> getVariables_array() {
+        return variables_array;
     }
     public Void visitSub(MiLenguajeParser.SubContext ctx){
         if (ctx.Sub() != null) {
