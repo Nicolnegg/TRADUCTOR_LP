@@ -106,6 +106,7 @@ public class MetodosTraductor implements MiLenguajeListener {
             }
             else if(ctx.Stack()!=null){
                 System.out.print("\n");
+                System.out.print(idmult(identacion)+"#No existe stack en python");
             }
             else if(ctx.TextWindow()!=null){
                 System.out.print("\n");
