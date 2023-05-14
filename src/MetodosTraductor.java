@@ -101,7 +101,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                 System.out.print("\n");
                 System.out.print(idmult(identacion)+"#No existe etiquetas en python");
                 System.out.print("\n");
-                System.out.print("pass");
+                System.out.print(idmult(identacion)+"pass");
             }
             else if(ctx.Program()!=null){
                 System.out.print("\n");
