@@ -218,6 +218,33 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterWhile(MiLenguajeParser.WhileContext ctx) {
+        // Obtener el nodo hijo correspondiente al contexto deseado
+        ParseTree subtree = ctx;
+
+        // Crear un Visitor
+        Visitors visitor = new Visitors();
+
+        // Visitar el subárbol con el Visitor
+        visitor.visit(subtree);
+        // Obtener la lista de identificadores
+        List<String> idsDic = visitor.getDicDefinido();
+        if(identacion<=0 ){
+            for (String idDic : idsDic) {
+                if(!elementIds.contains(idDic)){
+                    System.out.print("\n");
+                    System.out.print(idDic +"_TRA"+ "={}");
+                }
+            }
+        }
+        List<String> idsVar = visitor.getIdDefinido();
+        if(identacion<=0 ){
+            for (String idVar : idsVar) {
+                if(!elementIds.contains(idVar)){
+                    System.out.print("\n");
+                    System.out.print(idVar +"_TRA"+ "=0");
+                }
+            }
+        }
     }
 
     @Override
@@ -283,6 +310,7 @@ public class MetodosTraductor implements MiLenguajeListener {
         // Obtener la lista de identificadores
         List<String> ids = visitor.getDicDefinido();
         System.out.println(ids );
+
         List<String> ids2 = visitor.getIdDefinido();
         System.out.println(ids2 );
     }
@@ -310,7 +338,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
         List<String> variables = visitor.getVariables_string();
 
-        if (!variables.isEmpty()     ){
+        if (!variables.isEmpty()){
 
             String texto = variables.get(0);
             for (int i = 0; i < texto.length(); i++) {

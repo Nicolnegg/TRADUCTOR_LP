@@ -1,5 +1,6 @@
 
-For i = 1 To 3
+userNums[i] = i * 2
+While(i = 1 )
    userNums[i] = i * 2
    TextWindow.WriteLine(userNums)
    userVals[4-i] = (4 * i) / 2
@@ -13,4 +14,19 @@ For i = 1 To 3
    c=3
    a=3
    userVals2222[4-i] = (4 * i) / 2
-EndFor
+   While(i = 1 )
+      userNums[i] = i * 2
+      TextWindow.WriteLine(userNums)
+      userVals5[4-i] = (4 * i) / 2
+      userNums6[i][i] = i * 2
+      userNums888[i] = i * 2
+      userVals888[4-i] = (4 * i) / 2
+      a=3
+      a=3
+      a=3
+      b=3
+      c=3
+      a=3
+      userVals2222[4-i] = (4 * i) / 2
+   EndWhile
+EndWhile
