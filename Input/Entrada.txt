@@ -1,32 +1,34 @@
+n = 3
+factorial_recursivo()
+n = return
+factorial_recursivo()
+TextWindow.WriteLine(return)
 
-userNums[i] = i * 2
-While(i = 1 )
-   userNums[i] = i * 2
-   TextWindow.WriteLine(userNums)
-   userVals[4-i] = (4 * i) / 2
-   userNums[i][i] = i * 2
-   userNums[i] = i * 2
-   userVals[4-i] = (4 * i) / 2
-   a=3
-   a=3
-   a=3
-   b=3
-   c=3
-   a=3
-   userVals2222[4-i] = (4 * i) / 2
-   While(i = 1 )
-      userNums[i] = i * 2
-      TextWindow.WriteLine(userNums)
-      userVals5[4-i] = (4 * i) / 2
-      userNums6[i][i] = i * 2
-      userNums888[i] = i * 2
-      userVals888[4-i] = (4 * i) / 2
-      a=3
-      a=3
-      a=3
-      b=3
-      c=3
-      a=3
-      userVals2222[4-i] = (4 * i) / 2
-   EndWhile
-EndWhile
+Sub factorial_recursivo
+   If (n = 1) Then
+      return = 1
+   Else
+      Stack.PushValue(factorial_params, n)
+      n = n - 1
+      factorial_recursivo()
+      res = return
+
+      n = Stack.PopValue(factorial_params)
+      return = n * return
+   EndIf
+EndSub
+
+
+Sub factorial_recursivo2222222
+   If (n = 1) Then
+      return = 1
+   Else
+      Stack.PushValue(factorial_params, n)
+      n = n - 1
+      factorial_recursivo()
+      res = return
+
+      n = Stack.PopValue(factorial_params)
+      return = n * return
+   EndIf
+EndSub

@@ -1,5 +1,7 @@
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +10,7 @@ public class Visitors extends MiLenguajeBaseVisitor<Void> {
     public  List<String> dicDefinido = new ArrayList<>();
     public  List<String> idDefinido = new ArrayList<>();
     public  List<String> variables_string = new ArrayList<>();
+
 
     public Void visitSentenciaElse(MiLenguajeParser.SentenciaElseContext ctx){
         if(ctx.Id()!=null){
@@ -43,6 +46,15 @@ public class Visitors extends MiLenguajeBaseVisitor<Void> {
 
     public List<String> getVariables_string() {
         return variables_string;
+    }
+    public Void visitSub(MiLenguajeParser.SubContext ctx){
+        if (ctx.Sub() != null) {
+            // Create a generic parse tree walker that can trigger callbacks
+            ParseTreeWalker walker = new ParseTreeWalker();
+            // Walk the tree created during the parse, trigger callbacks
+            walker.walk(new MetodosTraductor(), ctx);
+        }
+        return super.visitSub(ctx);
     }
 
 }
