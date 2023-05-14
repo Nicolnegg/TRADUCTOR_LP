@@ -283,6 +283,8 @@ public class MetodosTraductor implements MiLenguajeListener {
         // Obtener la lista de identificadores
         List<String> ids = visitor.getDicDefinido();
         System.out.println(ids );
+        List<String> ids2 = visitor.getIdDefinido();
+        System.out.println(ids2 );
     }
 
     @Override
