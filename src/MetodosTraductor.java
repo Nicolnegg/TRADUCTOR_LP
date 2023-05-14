@@ -308,7 +308,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
         List<String> variables = visitor.getVariables_string();
 
-        if (!variables.isEmpty()){
+        if (!variables.isEmpty()     ){
 
             String texto = variables.get(0);
             for (int i = 0; i < texto.length(); i++) {
