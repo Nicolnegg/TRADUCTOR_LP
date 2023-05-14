@@ -22,7 +22,6 @@ public class Visitors extends MiLenguajeBaseVisitor<Void> {
                     idDefinido.add(id);
                 }
             }
-
         }
         return super.visitSentenciaElse(ctx);
     }
