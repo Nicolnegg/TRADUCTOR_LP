@@ -112,8 +112,11 @@ public class MetodosTraductor implements MiLenguajeListener {
                 System.out.print("\n");
             }
             else if(ctx.Id()!=null){
+
                 if(!elementIds.contains(ctx.Id().getText())){
-                    if(ctx.identSentencia()!=null && ctx.identSentencia().Tkn_left_paren()!=null | ctx.identSentencia().Tkn_colon()!=null){
+
+                    if(ctx.identSentencia()!=null && ctx.identSentencia().Tkn_left_paren()==null && ctx.identSentencia().Tkn_colon()==null){
+
                         elementIds.add(ctx.Id().getText());
                     }
                 }
@@ -287,6 +290,7 @@ public class MetodosTraductor implements MiLenguajeListener {
             List<String> idsVar = visitor.getIdDefinido();
             if(identacion<=0 ){
                 for (String idVar : idsVar) {
+
                     if(!elementIds.contains(idVar)){
                         System.out.print("\n");
                         System.out.print(idmult(identacion) + "global " + idVar + "_TRA");
