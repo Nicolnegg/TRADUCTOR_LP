@@ -271,7 +271,20 @@ public class MetodosTraductor implements MiLenguajeListener {
     public void exitWhile(MiLenguajeParser.WhileContext ctx) {
         if (ctx.EndWhile()!=null && (!subs |(subs && !esta_sub) )) {
             identacion -= 1;
+
         }
+        // Obtener el nodo hijo correspondiente al contexto deseado
+        ParseTree subtree = ctx;
+
+        // Crear un Visitor
+        Visitors visitor = new Visitors();
+
+        // Visitar el subárbol con el Visitor
+        visitor.visit(subtree);
+        // Obtener la lista de identificadores
+        List<String> idsDic = visitor.getDicDefinido();
+        idsDic.clear();
+
     }
 
     @Override
@@ -358,6 +371,18 @@ public class MetodosTraductor implements MiLenguajeListener {
     public void exitFor(MiLenguajeParser.ForContext ctx) {
         if (ctx.EndFor()!=null && (!subs |(subs && !esta_sub) )) {
             identacion -= 1;
+            // Obtener el nodo hijo correspondiente al contexto deseado
+            ParseTree subtree = ctx;
+
+            // Crear un Visitor
+            Visitors visitor = new Visitors();
+
+            // Visitar el subárbol con el Visitor
+            visitor.visit(subtree);
+            // Obtener la lista de identificadores
+            List<String> idsDic = visitor.getDicDefinido();
+            idsDic.clear();
+
         }
     }
 
