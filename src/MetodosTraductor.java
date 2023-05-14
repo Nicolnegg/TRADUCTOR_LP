@@ -251,6 +251,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                     }
                 }
             }
+
             List<String> idsVar = visitor.getIdDefinido();
             if(identacion<=0 ){
                 for (String idVar : idsVar) {
