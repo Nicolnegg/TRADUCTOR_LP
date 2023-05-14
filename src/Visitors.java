@@ -19,8 +19,8 @@ public class Visitors extends MiLenguajeBaseVisitor<Void> {
     public Void visitIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx){
         String variable = ctx.variable().getText();
 
-        variables_string.add(variable);
-        return super.visitIdentSentencia(ctx);
+          variables_string.add(variable);
+          return super.visitIdentSentencia(ctx);
 
     }
 
