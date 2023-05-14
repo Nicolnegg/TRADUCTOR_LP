@@ -16,13 +16,19 @@ public class Visitors extends MiLenguajeBaseVisitor<Void> {
         return dicDefinido;
     }
 
-    public Void visitIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx){
-        String variable = ctx.variable().getText();
+    public Void visitIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx) {
 
-          variables_string.add(variable);
-          return super.visitIdentSentencia(ctx);
+        if (ctx.variable() != null) {
+            String variable = ctx.variable().getText();
 
+            variables_string.add(variable);
+            return super.visitIdentSentencia(ctx);
+
+        }
+
+        return null;
     }
+
 
 
     public List<String> getVariables_string() {
