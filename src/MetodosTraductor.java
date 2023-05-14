@@ -116,7 +116,6 @@ public class MetodosTraductor implements MiLenguajeListener {
                     if(ctx.identSentencia()!=null && ctx.identSentencia().Tkn_left_paren()!=null | ctx.identSentencia().Tkn_colon()!=null){
                         elementIds.add(ctx.Id().getText());
                     }
-
                 }
                 System.out.print("\n");
                 if(ctx.identSentencia()!=null && ctx.identSentencia().Tkn_colon()==null){
@@ -127,7 +126,6 @@ public class MetodosTraductor implements MiLenguajeListener {
                 System.out.println(idmult(identacion)+ "#"+ctx.COMMENT().getText().substring(1));
             }
         }
-
 
     }
 
@@ -151,6 +149,7 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterSub(MiLenguajeParser.SubContext ctx) {
+
         if (!ctx.isEmpty()){
             esta_sub=true;
             if (ctx.Sub()!=null && ((subs==false |(subs==true && esta_sub == false) ))) {
@@ -160,6 +159,39 @@ public class MetodosTraductor implements MiLenguajeListener {
                     String value = ctx.Id().getText();
                     System.out.print(value+ "_TRA" +"():");
                     identacion +=1;
+                }
+            }
+        }
+        if(!subs){
+            // Obtener el nodo hijo correspondiente al contexto deseado
+            ParseTree subtree = ctx.sentenciaElse();
+
+            // Crear un Visitor
+            Visitors visitor = new Visitors();
+
+            // Visitar el subárbol con el Visitor
+            visitor.visit(subtree);
+            // Obtener la lista de identificadores
+            List<String> idsDic = visitor.getDicDefinido();
+            if(identacion==1 ){
+                for (String idDic : idsDic) {
+                    if(!elementIds.contains(idDic)){
+                        System.out.print("\n");
+                        System.out.print(idmult(identacion) + "global " + idDic + "_TRA");
+                        System.out.print("\n");
+                        System.out.print(idmult(identacion) + idDic +"_TRA"+ "={}");
+                        definidos.add(idDic);
+                    }
+                }
+            }
+            List<String> idsVar = visitor.getIdDefinido();
+            if(identacion==1 ){
+                for (String idVar : idsVar) {
+                    if(!elementIds.contains(idVar)){
+                        System.out.print("\n");
+                        System.out.print(idmult(identacion) + "global " + idVar + "_TRA");
+                        definidos.add(idVar);
+                    }
                 }
             }
         }
@@ -271,7 +303,20 @@ public class MetodosTraductor implements MiLenguajeListener {
     public void exitWhile(MiLenguajeParser.WhileContext ctx) {
         if (ctx.EndWhile()!=null && (!subs |(subs && !esta_sub) )) {
             identacion -= 1;
+
         }
+        // Obtener el nodo hijo correspondiente al contexto deseado
+        ParseTree subtree = ctx;
+
+        // Crear un Visitor
+        Visitors visitor = new Visitors();
+
+        // Visitar el subárbol con el Visitor
+        visitor.visit(subtree);
+        // Obtener la lista de identificadores
+        List<String> idsDic = visitor.getDicDefinido();
+        idsDic.clear();
+
     }
 
     @Override
@@ -358,6 +403,18 @@ public class MetodosTraductor implements MiLenguajeListener {
     public void exitFor(MiLenguajeParser.ForContext ctx) {
         if (ctx.EndFor()!=null && (!subs |(subs && !esta_sub) )) {
             identacion -= 1;
+            // Obtener el nodo hijo correspondiente al contexto deseado
+            ParseTree subtree = ctx;
+
+            // Crear un Visitor
+            Visitors visitor = new Visitors();
+
+            // Visitar el subárbol con el Visitor
+            visitor.visit(subtree);
+            // Obtener la lista de identificadores
+            List<String> idsDic = visitor.getDicDefinido();
+            idsDic.clear();
+
         }
     }
 
