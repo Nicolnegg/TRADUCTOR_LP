@@ -256,6 +256,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                     if(!elementIds.contains(idVar)){
                         System.out.print("\n");
                         System.out.print(idmult(identacion) + "global " + idVar + "_TRA");
+                        System.out.print("\n");
                         System.out.print(idVar +"_TRA"+ "=0");
                     }
                 }
@@ -341,6 +342,7 @@ public class MetodosTraductor implements MiLenguajeListener {
                     if(!elementIds.contains(idVar)){
                         System.out.print("\n");
                         System.out.print(idmult(identacion) + "global " + idVar + "_TRA");
+                        System.out.print("\n");
                         System.out.print(idVar +"_TRA"+ "=0");
                     }
                 }
