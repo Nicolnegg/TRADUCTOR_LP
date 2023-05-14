@@ -34,8 +34,10 @@ public class Visitors extends MiLenguajeBaseVisitor<Void> {
     }
 
     public Void visitIdentSentencia(MiLenguajeParser.IdentSentenciaContext ctx){
-        String variable = ctx.variable().getText();
-        variables_string.add(variable);
+        if (ctx.variable() != null) {
+            String variable = ctx.variable().getText();
+            variables_string.add(variable);
+        }
         return super.visitIdentSentencia(ctx);
 
     }
@@ -43,7 +45,5 @@ public class Visitors extends MiLenguajeBaseVisitor<Void> {
     public List<String> getVariables_string() {
         return variables_string;
     }
-
-
 
 }
