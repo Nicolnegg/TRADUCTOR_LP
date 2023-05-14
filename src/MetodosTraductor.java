@@ -601,16 +601,26 @@ public class MetodosTraductor implements MiLenguajeListener {
             if (!variables_array.isEmpty()){
 
                 String var_arreglo = variables_array.get(0);
-                for (int i = 0; i < var_arreglo.length(); i++) {
-                    char c = var_arreglo.charAt(i);
 
-                    if (c == '['){
-                        return;
-                    }
-                    if (c == '"') {
-                        isString = true;
-                    }
+                for (int i = 0; i < variables_array.size(); i++) {
+                    if (variables_array.size()==1) {
+                            for (int y = 0; y < var_arreglo.length(); y++){
+                            char c = var_arreglo.charAt(y);
 
+                            if (c == '[') {
+                                return;
+                            }
+                            if (c == '"') {
+                                isString = true;
+                            }
+                        }
+                    }
+                    else {
+                        if(variables_array.get(i).contains("\"")){
+                            isString = true;
+
+                        }
+                    }
                 }
 
             }
