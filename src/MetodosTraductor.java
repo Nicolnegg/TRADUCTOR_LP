@@ -108,7 +108,6 @@ public class MetodosTraductor implements MiLenguajeListener {
             }
             else if(ctx.Stack()!=null){
                 System.out.print("\n");
-                System.out.print(idmult(identacion)+"#No existe stack en python");
             }
             else if(ctx.TextWindow()!=null){
                 System.out.print("\n");
@@ -872,36 +871,37 @@ public class MetodosTraductor implements MiLenguajeListener {
     public void enterFuncionContinuidad(MiLenguajeParser.FuncionContinuidadContext ctx) {
         if((!subs |(subs && !esta_sub) )){
             if(ctx.Id().getText().equals("Delay")){
-                System.out.print(idmult(identacion) + "time.sleep");
+                System.out.print(idmult(identacion) + "time.sleep(");
             }
             else if(ctx.Id().getText().equals("End")){
-                System.out.print(idmult(identacion) + "sys.exit");
+                System.out.print(idmult(identacion) + "sys.exit(");
             }
             else if(ctx.Id().getText().equals("Read")){
-                System.out.print(idmult(identacion) + "input");
+                System.out.print(idmult(identacion) + "input(");
             }
             else if(ctx.Id().getText().equals("Write")){
-                System.out.print(idmult(identacion) + "sys.stdout.write(str");
+                System.out.print(idmult(identacion) + "sys.stdout.write(str(");
             }
             else if(ctx.Id().getText().equals("WriteLine")){
-                System.out.print(idmult(identacion) + "print");
+                System.out.print(idmult(identacion) + "print(");
             }
 
-
-            if(ctx.Tkn_left_paren()!=null){
-                System.out.print("(");
-            }
-
-            if(ctx.Id().getText().equals("PushValue")){
+            else if(ctx.Id().getText().equals("PushValue")){
                 if (ctx.funcionVar().variable()!=null){
                     String stack=ctx.funcionVar().variable().getText();
                     if(!elementIds.contains(stack)){
                         System.out.print( "\n");
-                        System.out.print( stack+"=[]");
+                        System.out.print( stack+"_TRA = []");
+                        System.out.print( "\n");
                         elementIds.add(stack);
                     }
                 }
             }
+
+            else if(ctx.Tkn_left_paren()!=null){
+                System.out.print("(");
+            }
+
         }
     }
 
@@ -919,8 +919,13 @@ public class MetodosTraductor implements MiLenguajeListener {
     public void enterFuncionVar(MiLenguajeParser.FuncionVarContext ctx){
         if(!subs |(subs && !esta_sub)){
             if(ctx.Tkn_comma()!=null ){
+                if(ctx.getParent().getParent().getChild(0).getText().equals("PushValue")){
+                    System.out.print(".append(" );
+                }
+                else{
+                    System.out.print(",");
+                }
 
-                System.out.print(",");
             }
 
         }
