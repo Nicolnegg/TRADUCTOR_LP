@@ -891,11 +891,16 @@ public class MetodosTraductor implements MiLenguajeListener {
                     String stack=ctx.funcionVar().variable().getText();
                     if(!elementIds.contains(stack)){
                         System.out.print( "\n");
-                        System.out.print( stack+"_TRA = []");
+                        System.out.print( idmult(identacion)+stack+"_TRA = []");
                         System.out.print( "\n");
                         elementIds.add(stack);
                     }
+                    System.out.print( idmult(identacion));
+
                 }
+            }
+            else if(ctx.Id().getText().equals("PopValue")){
+                System.out.print( idmult(identacion));
             }
 
             else if(ctx.Tkn_left_paren()!=null){
@@ -926,6 +931,9 @@ public class MetodosTraductor implements MiLenguajeListener {
                     System.out.print(",");
                 }
 
+            }
+            if(ctx.getParent().getParent().getChild(0).getText().equals("PopValue")){
+                System.out.print(".pop(" );
             }
 
         }
