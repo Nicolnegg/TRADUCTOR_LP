@@ -874,21 +874,33 @@ public class MetodosTraductor implements MiLenguajeListener {
             if(ctx.Id().getText().equals("Delay")){
                 System.out.print(idmult(identacion) + "time.sleep");
             }
-            if(ctx.Id().getText().equals("End")){
+            else if(ctx.Id().getText().equals("End")){
                 System.out.print(idmult(identacion) + "sys.exit");
             }
-            if(ctx.Id().getText().equals("Read")){
+            else if(ctx.Id().getText().equals("Read")){
                 System.out.print(idmult(identacion) + "input");
             }
-            if(ctx.Id().getText().equals("Write")){
+            else if(ctx.Id().getText().equals("Write")){
                 System.out.print(idmult(identacion) + "sys.stdout.write(str");
             }
-            if(ctx.Id().getText().equals("WriteLine")){
+            else if(ctx.Id().getText().equals("WriteLine")){
                 System.out.print(idmult(identacion) + "print");
             }
 
+
             if(ctx.Tkn_left_paren()!=null){
                 System.out.print("(");
+            }
+
+            if(ctx.Id().getText().equals("PushValue")){
+                if (ctx.funcionVar().variable()!=null){
+                    String stack=ctx.funcionVar().variable().getText();
+                    if(!elementIds.contains(stack)){
+                        System.out.print( "\n");
+                        System.out.print( stack+"=[]");
+                        elementIds.add(stack);
+                    }
+                }
             }
         }
     }
@@ -905,9 +917,14 @@ public class MetodosTraductor implements MiLenguajeListener {
 
     @Override
     public void enterFuncionVar(MiLenguajeParser.FuncionVarContext ctx){
-        if(ctx.Tkn_comma()!=null && (!subs |(subs && !esta_sub) )){
-            System.out.print(",");
+        if(!subs |(subs && !esta_sub)){
+            if(ctx.Tkn_comma()!=null ){
+
+                System.out.print(",");
+            }
+
         }
+
     }
 
     @Override
